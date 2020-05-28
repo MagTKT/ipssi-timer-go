@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -33,6 +35,22 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserTeam::class, mappedBy="idUser")
+     */
+    private $userTeams;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserProject::class, mappedBy="idUser")
+     */
+    private $userProjects;
+
+    public function __construct()
+    {
+        $this->userTeams = new ArrayCollection();
+        $this->userProjects = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -110,5 +128,67 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|UserTeam[]
+     */
+    public function getUserTeams(): Collection
+    {
+        return $this->userTeams;
+    }
+
+    public function addUserTeam(UserTeam $userTeam): self
+    {
+        if (!$this->userTeams->contains($userTeam)) {
+            $this->userTeams[] = $userTeam;
+            $userTeam->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserTeam(UserTeam $userTeam): self
+    {
+        if ($this->userTeams->contains($userTeam)) {
+            $this->userTeams->removeElement($userTeam);
+            // set the owning side to null (unless already changed)
+            if ($userTeam->getIdUser() === $this) {
+                $userTeam->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserProject[]
+     */
+    public function getUserProjects(): Collection
+    {
+        return $this->userProjects;
+    }
+
+    public function addUserProject(UserProject $userProject): self
+    {
+        if (!$this->userProjects->contains($userProject)) {
+            $this->userProjects[] = $userProject;
+            $userProject->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProject(UserProject $userProject): self
+    {
+        if ($this->userProjects->contains($userProject)) {
+            $this->userProjects->removeElement($userProject);
+            // set the owning side to null (unless already changed)
+            if ($userProject->getIdUser() === $this) {
+                $userProject->setIdUser(null);
+            }
+        }
+
+        return $this;
     }
 }
