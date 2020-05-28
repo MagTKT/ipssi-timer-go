@@ -24,13 +24,13 @@ class UserProject
     private $idUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity=project::class, inversedBy="userProjects")
+     * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="userProjects")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idProject;
 
     /**
-     * @ORM\ManyToOne(targetEntity=status::class, inversedBy="userProjects")
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="userProjects")
      */
     private $idStatus;
 
