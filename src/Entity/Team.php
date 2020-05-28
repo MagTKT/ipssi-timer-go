@@ -30,7 +30,7 @@ class Team
     private $userTeams;
 
     /**
-     * @ORM\ManyToOne(targetEntity=status::class, inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="teams")
      */
     private $idStatus;
 
