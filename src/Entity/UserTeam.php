@@ -18,19 +18,19 @@ class UserTeam
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="userTeams")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userTeams")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity=team::class, inversedBy="userTeams")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="userTeams")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idTeam;
 
     /**
-     * @ORM\ManyToOne(targetEntity=status::class, inversedBy="userTeams")
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="userTeams")
      */
     private $idStatus;
 
