@@ -1,44 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang='fr'>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        {% endblock %}
+        <meta charset="utf-8">
+  <title>Instant - Bootstrap Personal Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="lib/php-mail-form/validate.js"></script>
+      
+        <!-- Template Main Javascript File -->
+        <script src="js/main.js"></script>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('team_new') }}">Groupe</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_index') }}">Profil</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Domaine du temps</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_new') }}">Inscription</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Connexion</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                <a class="navbar-brand" href="index.html">INSTANT</a>
+              </div>
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="index.html">Home</a></li>
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('team_new') }}">Groupe</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_index') }}">Profil</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Domaine du temps</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_new') }}">Inscription</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Connexion</a></li>
+                </ul>
+              </div>
+              <!--/.nav-collapse -->
+            </div>
+          </div>
+          <div id="headerwrap">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                  <h4>Bienvenue dans le domaine du temps</h4>
+                  <h1>TIMER GO</h1>
+                </div>
+              </div>
+            </div>
+            <!-- /container -->
+          </div>
+       
         {% block body %}{% endblock %}
-
-        {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-            <script src="assets/mail/jqBootstrapValidation.js"></script>
-            <script src="assets/mail/contact_me.js"></script>
-            <!-- Core theme JS-->
-            <script src="js/scripts.js"></script>
-        {% endblock %}
     </body>
+    
 </html>
