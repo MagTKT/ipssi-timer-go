@@ -232,6 +232,9 @@ h1, h2, h3, h4, h5, h6 {
 	opacity: 0.4;
 }
 
+.contain-block{
+  padding: 50px;
+}
 
 /* Contact Form */
 
