@@ -34,10 +34,10 @@ class Timer
      * @ORM\JoinColumn(nullable=false)
      */
     private $idProject;
-
     /**
      * @ORM\Column(type="datetime")
      */
+
     private $DateTime_Debut;
 
     /**
@@ -49,7 +49,12 @@ class Timer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $Cumul_s;
-
+  
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $TimerComment;
+  
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +128,15 @@ class Timer
     public function setCumulS(?int $Cumul_s): self
     {
         $this->Cumul_s = $Cumul_s;
+
+    public function getTimerComment(): ?string
+    {
+        return $this->TimerComment;
+    }
+
+    public function setTimerComment(?string $TimerComment): self
+    {
+        $this->TimerComment = $TimerComment;
 
         return $this;
     }
