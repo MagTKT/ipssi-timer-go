@@ -69,7 +69,7 @@ tr {
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-	color: #1abc9c;
+	color: white;
 }
 
 .navbar-default {
@@ -78,7 +78,7 @@ tr {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #1abc9c;
+	color: white;
 	background-color: transparent;
 }
 
@@ -87,7 +87,7 @@ tr {
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: #1abc9c;
+	color: white;
 }
 
 .navbar-default .navbar-toggle {
@@ -159,7 +159,7 @@ tr {
 }
 
 #social i:hover {
-	color: #1abc9c
+	color: white
 }
 
 #footerwrap {
@@ -404,4 +404,9 @@ tr {
 
 .credits {
   color: #999;
+}
+
+a{
+  color: white !important;
+  text-decoration: none !important;
 }
