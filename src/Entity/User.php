@@ -46,10 +46,16 @@ class User implements UserInterface
      */
     private $userProjects;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Timer::class, mappedBy="idUser")
+     */
+    private $timers;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
+        $this->timers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +192,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userProject->getIdUser() === $this) {
                 $userProject->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Timer[]
+     */
+    public function getTimers(): Collection
+    {
+        return $this->timers;
+    }
+
+    public function addTimer(Timer $timer): self
+    {
+        if (!$this->timers->contains($timer)) {
+            $this->timers[] = $timer;
+            $timer->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimer(Timer $timer): self
+    {
+        if ($this->timers->contains($timer)) {
+            $this->timers->removeElement($timer);
+            // set the owning side to null (unless already changed)
+            if ($timer->getIdUser() === $this) {
+                $timer->setIdUser(null);
             }
         }
 
