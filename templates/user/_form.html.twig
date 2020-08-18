@@ -7,18 +7,21 @@
             <div class="card card-3">
                 <div class="card-heading"></div>
                 <div class="card-body">
+                    {{ form_start(form) }}
                     <form method="POST">
                         <div class="input-group">
-                            <input class="input--style-3" type="email" placeholder="Email" name="email">
+                            {{ form_row(form.email) }}
                         </div>
                         <div class="input-group">
                             <input class="input--style-3" type="text" placeholder="Password" name="password">
+                        </div><div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Confirm Password" name="password">
                         </div>
                         <div class="p-t-10">
                             <button class="btn btn--pill btn--green" type="submit">Envoyer</button>
                         </div>
                     </form>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
-    {# </div> #}
