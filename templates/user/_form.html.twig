@@ -1,27 +1,17 @@
-{# {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }} #}
-
-        <div class="wrapper wrapper--w780">
-            <div class="card card-3">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    {{ form_start(form) }}
-                    <form method="POST">
-                        <div class="input-group">
-                            {{ form_row(form.email) }}
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Password" name="password">
-                        </div><div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Confirm Password" name="password">
-                        </div>
-                        <div class="p-t-10">
-                            <button class="btn btn--pill btn--green" type="submit">Envoyer</button>
-                        </div>
-                    </form>
-                    {{ form_end(form) }}
+<div class="wrapper wrapper--w780">
+    <div class="card card-3">
+        <div class="card-heading"></div>
+        <div class="card-body">
+            {{ form_start(form) }}
+                <div class="input-group input--style-3">
+                    {{ form_row(form.email) }}
+                <div class="input-group input--style-3">
+                    {{ form_row(form.password) }} 
                 </div>
-            </div>
+                <div class="p-t-10 btn btn--pill btn--green">
+                    {{ form_row(form.save) }} 
+                </div>
+            {{ form_end(form) }}
         </div>
+    </div>
+</div>

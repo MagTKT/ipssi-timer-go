@@ -16,6 +16,11 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => "Répéter le mot de passe "],
+            ])
+            ->add('save', SubmitType::class,[
+                'label' => 'Envoyer',
             ])
         ;
     }
