@@ -34,9 +34,15 @@ class Team
      */
     private $idStatus;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Timer::class, mappedBy="idTeam")
+     */
+    private $timers;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
+        $this->timers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +101,37 @@ class Team
     public function setIdStatus(?status $idStatus): self
     {
         $this->idStatus = $idStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Timer[]
+     */
+    public function getTimers(): Collection
+    {
+        return $this->timers;
+    }
+
+    public function addTimer(Timer $timer): self
+    {
+        if (!$this->timers->contains($timer)) {
+            $this->timers[] = $timer;
+            $timer->setIdTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimer(Timer $timer): self
+    {
+        if ($this->timers->contains($timer)) {
+            $this->timers->removeElement($timer);
+            // set the owning side to null (unless already changed)
+            if ($timer->getIdTeam() === $this) {
+                $timer->setIdTeam(null);
+            }
+        }
 
         return $this;
     }

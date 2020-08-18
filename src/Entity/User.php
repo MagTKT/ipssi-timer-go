@@ -45,7 +45,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=UserProject::class, mappedBy="idUser")
      */
     private $userProjects;
-
+  
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -60,11 +60,17 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="users")
      */
     private $Status;
+  
+    /**
+     * @ORM\OneToMany(targetEntity=Timer::class, mappedBy="idUser")
+     */
+    private $timers;
 
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
+        $this->timers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,6 +213,21 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Timer[]
+     */
+    public function getTimers(): Collection
+    {
+        return $this->timers;
+    }
+
+    public function addTimer(Timer $timer): self
+    {
+        if (!$this->timers->contains($timer)) {
+            $this->timers[] = $timer;
+            $timer->setIdUser($this);
+        }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -218,6 +239,16 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function removeTimer(Timer $timer): self
+    {
+        if ($this->timers->contains($timer)) {
+            $this->timers->removeElement($timer);
+            // set the owning side to null (unless already changed)
+            if ($timer->getIdUser() === $this) {
+                $timer->setIdUser(null);
+            }
+        }
 
     public function getLastName(): ?string
     {
