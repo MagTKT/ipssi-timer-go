@@ -46,6 +46,21 @@ class User implements UserInterface
      */
     private $userProjects;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="users")
+     */
+    private $Status;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
@@ -188,6 +203,42 @@ class User implements UserInterface
                 $userProject->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(?Status $Status): self
+    {
+        $this->Status = $Status;
 
         return $this;
     }
