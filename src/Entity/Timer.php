@@ -41,7 +41,7 @@ class Timer
     private $DateTime_Debut;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $DateTime_Fin;
 
