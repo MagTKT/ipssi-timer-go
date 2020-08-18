@@ -4,12 +4,15 @@
         <div class="card-body">
             {{ form_start(form) }}
                 <div class="input-group input--style-3">
-                    {{ form_row(form.email) }}
-                <div class="input-group input--style-3">
-                    {{ form_row(form.password) }} 
+                    <div class='input'>
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.password) }}  
+                    </div> 
                 </div>
                 <div class="p-t-10 btn btn--pill btn--green">
-                    {{ form_row(form.save) }} 
+                    {{ form_row(form.save) }}
                 </div>
             {{ form_end(form) }}
         </div>
