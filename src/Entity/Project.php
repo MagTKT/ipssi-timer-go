@@ -34,9 +34,15 @@ class Project
      */
     private $idStatus;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Timer::class, mappedBy="idProject")
+     */
+    private $timers;
+
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
+        $this->timers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +101,37 @@ class Project
     public function setIdStatus(?status $idStatus): self
     {
         $this->idStatus = $idStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Timer[]
+     */
+    public function getTimers(): Collection
+    {
+        return $this->timers;
+    }
+
+    public function addTimer(Timer $timer): self
+    {
+        if (!$this->timers->contains($timer)) {
+            $this->timers[] = $timer;
+            $timer->setIdProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTimer(Timer $timer): self
+    {
+        if ($this->timers->contains($timer)) {
+            $this->timers->removeElement($timer);
+            // set the owning side to null (unless already changed)
+            if ($timer->getIdProject() === $this) {
+                $timer->setIdProject(null);
+            }
+        }
 
         return $this;
     }
