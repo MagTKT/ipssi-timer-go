@@ -51,15 +51,18 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-body,a{
+/* body,a{
   cursor: url("/assets/img/tartis_cursor.png"), auto
-}
+} */
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
-    color: #4a4a4a;
+    color: white;
+    text-align: center;
 }
-
+tr {
+  color: #fcfbfb;
+}
 
 .navbar-brand {
 	font-weight: 700;
