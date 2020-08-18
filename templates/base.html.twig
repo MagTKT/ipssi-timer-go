@@ -21,6 +21,7 @@
 
         <!-- Main Stylesheet File -->
         <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/form.css" rel="stylesheet">
 
     </head>
     
@@ -37,7 +38,7 @@
               </div>
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                  <li class="active"><a href="index.html">Home</a></li>
+                  <li class="active"><a href="{{ path('home') }}">Home</a></li>
                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('team_new') }}">Groupe</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_index') }}">Profil</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Domaine du temps</a></li>
@@ -58,6 +59,7 @@
             
             <!-- Template Main Javascript File -->
             <script src="../js/scripts.js"></script>
+            <script src="../js/global.js"></script>
         {% endblock %}
     </body>
     
