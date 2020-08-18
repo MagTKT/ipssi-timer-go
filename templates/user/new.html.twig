@@ -3,11 +3,14 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-<div class='contain-block'>
-    <h1>Create new User</h1>
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class='contain-block'>
+        <h1>Inscription</h1>
 
-    {{ include('user/_form.html.twig') }}
+            {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+        <a href="{{ path('user_index') }}">Afficher la liste des utilisateurs</a>
+
+    </div>
 </div>
 {% endblock %}
