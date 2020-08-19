@@ -227,6 +227,7 @@ class User implements UserInterface
             $this->timers[] = $timer;
             $timer->setIdUser($this);
         }
+    }
 
     public function getName(): ?string
     {
@@ -249,7 +250,8 @@ class User implements UserInterface
                 $timer->setIdUser(null);
             }
         }
-
+    }
+    
     public function getLastName(): ?string
     {
         return $this->lastName;

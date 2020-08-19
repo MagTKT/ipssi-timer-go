@@ -51,22 +51,25 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-body,a{
+/* body,a{
   cursor: url("/assets/img/tartis_cursor.png"), auto
-}
+} */
 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
-    color: #4a4a4a;
+    color: white;
+    text-align: center;
 }
-
+tr {
+  color: #fcfbfb;
+}
 
 .navbar-brand {
 	font-weight: 700;
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-	color: #1abc9c;
+	color: white;
 }
 
 .navbar-default {
@@ -75,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #1abc9c;
+	color: white;
 	background-color: transparent;
 }
 
@@ -84,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: #1abc9c;
+	color: white;
 }
 
 .navbar-default .navbar-toggle {
@@ -156,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #social i:hover {
-	color: #1abc9c
+	color: white
 }
 
 #footerwrap {
@@ -401,4 +404,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .credits {
   color: #999;
+}
+
+a{
+  color: white !important;
+  text-decoration: none !important;
 }

@@ -128,7 +128,8 @@ class Timer
     public function setCumulS(?int $Cumul_s): self
     {
         $this->Cumul_s = $Cumul_s;
-
+    }
+    
     public function getTimerComment(): ?string
     {
         return $this->TimerComment;
