@@ -14,9 +14,6 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('name_project', TextType::class, ['label' => 'Nom'])
-            ->add('save', SubmitType::class,[
-                'label' => 'Envoyer',
-            ])
         ;
     }
 

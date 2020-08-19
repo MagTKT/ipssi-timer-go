@@ -10,7 +10,7 @@
                     </div> 
                 </div>
                 <div class="p-t-10 btn btn--pill btn--green">
-                    {{ form_row(form.save) }}
+                    <button class="btn">{{ button_label|default('Envoyer') }}</button>
                 </div>
             {{ form_end(form) }}
         </div>
