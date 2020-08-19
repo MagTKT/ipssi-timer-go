@@ -1,12 +1,5 @@
-<div class="wrapper wrapper--w780">
-    <div class="card card-3">
-        <div class="card-heading"></div>
-        <div class="card-body">
-            <form method="post" action="{{ path('project_delete', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                <input type="hidden" name="_method" value="DELETE">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
-                <button class="btn">Delete</button>
-            </form>
-        </div>
-    </div>
-</div>
+<form method="post" action="{{ path('project_delete', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
+    <button class="btn btn-info">Delete</button>
+</form>

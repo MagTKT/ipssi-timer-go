@@ -14,9 +14,6 @@ class TeamType extends AbstractType
     {
         $builder
         ->add('name', TextType::class, ['label' => 'Nom'])
-        ->add('save', SubmitType::class,[
-            'label' => 'Envoyer',
-        ])
         ;
     }
 

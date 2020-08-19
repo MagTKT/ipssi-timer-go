@@ -14,14 +14,14 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
 
         <!-- Bootstrap CSS File -->
-        <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Libraries CSS Files -->
-        <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Main Stylesheet File -->
-        <link href="../css/style.css" rel="stylesheet">
-        <link href="../css/form.css" rel="stylesheet">
+        <link href="../../css/style.css" rel="stylesheet">
+        <link href="../../css/form.css" rel="stylesheet">
 
     </head>
     
@@ -37,11 +37,16 @@
                   </button>
               </div>
               <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
+                  <ul class="nav navbar-nav navbar-right">
+                  {% if app.user %}
+                    <li class="nav-item"></li>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                  {% endif %}
                   <li class="active"><a href="{{ path('home') }}">Home</a></li>
-                  <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('project_index') }}">Projet</a></li>
-                  <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('team_index') }}">Team</a></li>
                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_index') }}">Users</a></li>
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('project_index') }}">Projet</a></li>
+                  <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('team_index') }}">Equipes</a></li>
                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Enregistrement du temps</a></li>
                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('user_new') }}">Inscription</a></li>
                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Connexion</a></li>
@@ -50,17 +55,17 @@
               <!--/.nav-collapse -->
             </div>
           </div>
-       
+
         {% block body %}{% endblock %}
 
         {% block javascripts %}
-            <script src="../lib/jquery/jquery.min.js"></script>
-            <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
-            <script src="../lib/php-mail-form/validate.js"></script>
+            <script src="../../lib/jquery/jquery.min.js"></script>
+            <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+            <script src="../../lib/php-mail-form/validate.js"></script>
             
             <!-- Template Main Javascript File -->
-            <script src="../js/scripts.js"></script>
-            <script src="../js/global.js"></script>
+            <script src="../../js/scripts.js"></script>
+            <script src="../../js/global.js"></script>
         {% endblock %}
     </body>
     

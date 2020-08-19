@@ -8,6 +8,7 @@
         <div class="contain-block">
             <h1>liste des users</h1>
             <div class="wrapper wrapper--w780">
+                <div class='url card-3bis'><a href="{{ path('user_new') }}">Creer un nouvel Utilisateur</a></div>
                 <div class="card card-3">
                     <div class="card-body">
                         <table class="table">
@@ -28,8 +29,8 @@
                                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                                     <td>{{ user.password }}</td>
                                     <td>
-                                        <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                                        <a href="{{ path('user_edit', {'id': user.id}) }}">editer</a>
+                                        <a class='color_one' href="{{ path('user_show', {'id': user.id}) }}">Detail</a>
+                                        <a class='color_two' href="{{ path('user_edit', {'id': user.id}) }}">Editer</a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -42,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn--pill btn--green" type="submit"><a href="{{ path('user_new') }}">Create un nouvel Utilisateur</a></button>
+
             
         </div>
     </div>
