@@ -5,6 +5,11 @@ label{
     -webkit-font-smoothing: antialiased; 
     padding: 5px 0px;
 }
+
+.url{
+  text-align: center;
+  margin: 35px 0px;
+}
 /* ==========================================================================
    #FONT
    ========================================================================== */
@@ -447,6 +452,18 @@ label{
     border-radius: 3px;
     background: #fff;
   }
+
+  .card-3bis{
+    background: #0000009c;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    display: table;
+  }
   
   .card-3 {
     background: #000;
@@ -458,6 +475,7 @@ label{
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     width: 100%;
     display: table;
+    min-height: 380px;
   }
   
   .card-3 .card-heading {
