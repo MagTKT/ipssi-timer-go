@@ -15,8 +15,8 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name_project</th>
-                                    <th>actions</th>
+                                    <th>Nom du projet</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,8 +25,8 @@
                                     <td>{{ project.id }}</td>
                                     <td>{{ project.nameProject }}</td>
                                     <td>
-                                        <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                                        <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                                        <a class='color_one' href="{{ path('project_show', {'id': project.id}) }}">Détail</a>
+                                        <a class='color_two' href="{{ path('project_edit', {'id': project.id}) }}">Editer</a>
                                     </td>
                                 </tr>
                             {% else %}

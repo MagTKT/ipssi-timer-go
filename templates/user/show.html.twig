@@ -3,32 +3,42 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="contain-block">
+            <h1>User</h1>
+            <div class="wrapper wrapper--w780">
+                <div class='url card-3bis'><a href="{{ path('user_index') }}">Retour à la liste</a></div>
+                    <div class="card card-3">
+                        <div class="card-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ user.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Roles</th>
+                                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Password</th>
+                                        <td>{{ user.password }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <div class='button'>
+                    <button class='btn btn-info'><a href="{{ path('user_edit', {'id': user.id}) }}">edit</a></button>
+                    {{ include('user/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

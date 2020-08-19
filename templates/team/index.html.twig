@@ -7,6 +7,7 @@
         <div class="contain-block">
         <h1>Team index</h1>
         <div class="wrapper wrapper--w780">
+            <div class='url card-3bis'><a href="{{ path('team_new') }}">Creer une nouvelle team</a></div>
             <div class="card card-3">
                 <div class="card-body">
                     <table class="table">
@@ -23,8 +24,8 @@
                                     <td>{{ team.id }}</td>
                                     <td>{{ team.name }}</td>
                                     <td>
-                                        <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
-                                        <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
+                                        <a class='color_one' href="{{ path('team_show', {'id': team.id}) }}">Détail</a>
+                                        <a class='color_two' href="{{ path('team_edit', {'id': team.id}) }}">Editer</a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -34,7 +35,6 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <a href="{{ path('team_new') }}">Create new</a>
                 </div>
             </div>
         </div>

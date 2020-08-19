@@ -5,6 +5,16 @@ label{
     -webkit-font-smoothing: antialiased; 
     padding: 5px 0px;
 }
+.color_one{
+  color: red !important;
+}
+.color_two{
+  color: green !important;
+}
+.button{
+  display: flex;
+  justify-content: space-around;
+}
 
 .url{
   text-align: center;
