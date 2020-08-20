@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -22,17 +22,24 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="L'email ne peut pas être vide")
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\NotBlank
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Il vous faut un mot de passe")
+     * @Assert\Length(min="5", minMessage="Le mot de passe est trop petit")
      */
     private $password;
 
@@ -48,11 +55,17 @@ class User implements UserInterface
   
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le prénom est trop petit",
+     * max="255", maxMessage="Le prénom est trop long")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le nom est trop petit",
+     * max="255", maxMessage="Le nom est trop long")
      */
     private $lastName;
 
