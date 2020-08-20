@@ -3,12 +3,29 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(form) }}
-    	{{ form_row(form.name) }}
-    	{{ form_row(form.last_name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-    {{ form_end(form) }}
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+    <div class="contain-block">
+        <h1>S'inscrire</h1>
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        <div class="input-group input--style-3">
+                            <div class='input'>
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.last_name) }}
+                                {{ form_row(form.email) }}
+                                {{ form_row(form.password) }} 
+                            </div> 
+                        </div>
+                        <div class="p-t-10 btn btn--pill btn--green">
+                            <button class="btn">{{ button_label|default("S'inscrire") }}</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

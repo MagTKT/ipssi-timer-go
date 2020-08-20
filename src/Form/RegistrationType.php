@@ -27,7 +27,6 @@ class RegistrationType extends AbstractType
                     ]),
                 ],
             ])
-            ->add("register", SubmitType::class, ['label' => "S'inscrire"])
             ->add('password', RepeatedType::class, ['type' =>PasswordType::class,
                 'first_options' => [
                     // instead of being set onto the object directly,
