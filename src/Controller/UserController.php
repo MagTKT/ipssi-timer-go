@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/user")
  */
@@ -23,6 +23,7 @@ class UserController extends AbstractController
     }
     /**
      * @Route("/", name="user_index", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function index(): Response
     {
@@ -58,6 +59,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function show(User $user): Response
     {
@@ -68,6 +70,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(Request $request, User $user): Response
     {
@@ -88,6 +91,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function delete(Request $request, User $user): Response
     {
