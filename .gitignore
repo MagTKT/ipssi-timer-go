@@ -53,3 +53,7 @@
 
 # pour version du composer
 docker-compose.yml
+
+# environnement
+.env
+.env.test
