@@ -137,7 +137,7 @@ tr {
 }
 
 #headerwrap .col-lg-offset-3 {
-    margin-top: 20%;
+    /* margin-top: 20%; */
     margin-left: 56%;
     text-shadow: 0px 3px 2px black;
 }
