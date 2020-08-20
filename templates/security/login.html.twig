@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connection{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
   <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
@@ -10,7 +10,7 @@
       <div class="card card-3">
       <div class="card-heading"></div>
       <div class="card-body">
-        <form method="POST">
+        <form  method="POST"> {# action="{{ path('app_login') }}" #}
           {% if error %}
               <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
           {% endif %}
@@ -22,16 +22,13 @@
           {% endif %}
 
           <div class="input-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" value="{{ last_username }}" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
           </div>
           <div class="input-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
           </div>
-          {# <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me"> Se souvenir de moi
-            </label>
-          </div> #}
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
           <div class="p-t-10">
               <button class="btn btn--pill btn--green" type="submit">Envoyer</button>
           </div>
