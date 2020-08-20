@@ -14,35 +14,37 @@ Clonage du projet Timer Go
 Ce qui suit vous donnera un projet qui est configuré et prêt à être utilisé:
 
 git clone git@github.com:MagTKT/ipssi-timer-go.git
-<br>
+<br><br>
 Dans votre terminal effectuer la commande :
-<br>
+<br><br>
 cd ipssi-timer-go
-<br>
+<br><br>
 Avant toute commande supplementaire assuré vous de creer un fichier a la racine du projet nommé .env
 copier coller l'intégralité de .envExemple.
-<br>
+<br><br>
 Il vous faudra modifier uniquement la parti base de donnée en y indiquant un nom de bdd un user et un mot de passe.
-<br>
+<br><br>
 EXEMPLE:
-<br>
+<br><br>
 MYSQL_DATABASE='nom de votre base'
+<br><br>
 MYSQL_USER='user de la base'
+<br><br>
 MYSQL_PASSWORD='mot de passe de la base'
-<br>
+<br><br>
 puis de nouveau dans votre terminal:
-<br>
+<br><br>
 docker-compose up --build
 
 Effectuer les migrations:
 -------------------------
 
 Toujours dans votre terminal:
-<br>
+<br><br>
 docker-compose exec web php bin/console make:migration
-<br>
+<br><br>
 docker-compose exec web php bin/console doctrine:migration:migrate
-<br>
+<br><br>
 Puis naviguer vers localhost:8010
 
 
@@ -50,8 +52,7 @@ Parametrage specifique (en cas de soucis):
 ------------------------------------------
 
 Sous windows : le docker-compose doit etre en version: '3.6'
-<br>
+<br><br>
 Sous mac : le docker-compose doit etre en version: '3.7'
-
 
 
