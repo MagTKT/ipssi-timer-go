@@ -2,10 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Team;
+use App\Entity\{Team, User};
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\{TextType, SubmitType,};
 
 class TeamType extends AbstractType
@@ -14,6 +15,12 @@ class TeamType extends AbstractType
     {
         $builder
         ->add('name', TextType::class, ['label' => 'Nom'])
+        ->add('teamAdmin', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => function(User $teamAdmin) {
+                    return $teamAdmin->getId();
+                },
+            ])
         ;
     }
 
