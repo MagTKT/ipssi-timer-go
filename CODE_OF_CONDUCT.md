@@ -1,5 +1,6 @@
 Code de conduite
 ----------------
+
 Notre engagement
 Dans l'intérêt de favoriser un environnement ouvert et accueillant, nous, en tant que contributeurs et mainteneurs, nous engageons à faire de la participation à notre projet et à notre communauté une expérience sans harcèlement pour tous, quels que soient l'âge, la taille, le handicap, l'origine ethnique, l'identité de genre et l'expression , niveau d'expérience, éducation, statut socio-économique, nationalité, apparence personnelle, religion ou identité et orientation sexuelles.
 
