@@ -39,7 +39,7 @@ class RegistrationType extends AbstractType
                         ]),
                     ],
                 ],   
-            ])*/
+            ])
         ;
     }
 
