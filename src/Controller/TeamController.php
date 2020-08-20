@@ -33,8 +33,11 @@ class TeamController extends AbstractController
         $team = new Team();
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $id_user = $this->getUser();
+            $team->setTeamAdmin($id_user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($team);
             $entityManager->flush();
