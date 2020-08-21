@@ -48,8 +48,6 @@ class UserController extends AbstractController
             $createdDate = date('Y-m-d H:i:s');
             $user->setDateCreation(new \DateTime($createdDate));
 
-            var_dump($user);
-            var_dump($createdDate);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
