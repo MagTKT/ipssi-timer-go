@@ -70,12 +70,18 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $Date_creation;
+      
+    /**
+     * @ORM\OneToMany(targetEntity=Team::class, mappedBy="TeamAdmin")
+     */
+    private $teams;
 
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->timers = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -289,6 +295,37 @@ class User implements UserInterface
     public function setDateCreation(?\DateTimeInterface $Date_creation): self
     {
         $this->Date_creation = $Date_creation;
+      
+        return $this;
+    }
+  
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->setTeamAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->contains($team)) {
+            $this->teams->removeElement($team);
+            // set the owning side to null (unless already changed)
+            if ($team->getTeamAdmin() === $this) {
+                $team->setTeamAdmin(null);
+            }
+        }
 
         return $this;
     }
