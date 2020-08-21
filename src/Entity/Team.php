@@ -44,6 +44,13 @@ class Team
      */
     private $Date_creation;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="Team")
+     */
+    private $projects;
+
+  
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teams")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -53,6 +60,7 @@ class Team
     {
         $this->userTeams = new ArrayCollection();
         $this->timers = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +174,37 @@ class Team
     public function setTeamAdmin(?User $TeamAdmin): self
     {
         $this->TeamAdmin = $TeamAdmin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getTeam() === $this) {
+                $project->setTeam(null);
+            }
+        }
 
         return $this;
     }
