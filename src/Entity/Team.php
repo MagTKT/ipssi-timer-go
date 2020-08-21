@@ -39,6 +39,12 @@ class Team
      */
     private $timers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teams")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $TeamAdmin;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
@@ -132,6 +138,18 @@ class Team
                 $timer->setIdTeam(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTeamAdmin(): ?User
+    {
+        return $this->TeamAdmin;
+    }
+
+    public function setTeamAdmin(?User $TeamAdmin): self
+    {
+        $this->TeamAdmin = $TeamAdmin;
 
         return $this;
     }

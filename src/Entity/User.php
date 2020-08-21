@@ -66,11 +66,17 @@ class User implements UserInterface
      */
     private $timers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Team::class, mappedBy="TeamAdmin")
+     */
+    private $teams;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->timers = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,6 +278,37 @@ class User implements UserInterface
     public function setStatus(?Status $Status): self
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->setTeamAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->contains($team)) {
+            $this->teams->removeElement($team);
+            // set the owning side to null (unless already changed)
+            if ($team->getTeamAdmin() === $this) {
+                $team->setTeamAdmin(null);
+            }
+        }
 
         return $this;
     }
