@@ -6,7 +6,6 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="contain-block">
-            <h1>User</h1>
             <div class="wrapper wrapper--w780">
                 <div class='url card-3bis'><a href="{{ path('user_index') }}">Retour à la liste</a></div>
                     <div class="card card-3">
@@ -14,8 +13,12 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Id</th>
-                                        <td>{{ user.id }}</td>
+                                        <th>Prénom</th>
+                                        <td>{{ user.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <td>{{ user.lastName }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
@@ -27,10 +30,15 @@
                                     </tr>
                                     <tr>
                                         <th>Password</th>
-                                        <td>{{ user.password }}</td>
+                                        <td>{{ "C'est privé :)" }}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            {{'Equipe dont vous faites partie : <br>'}}
+                            {% for team in user.getTeams %}
+                                <li>{{ team.name }}</li>
+                            {% endfor %}
+
                         </div>
                     </div>
                 <div class='button'>
