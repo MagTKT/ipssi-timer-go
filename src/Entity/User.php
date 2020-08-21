@@ -66,6 +66,11 @@ class User implements UserInterface
      */
     private $timers;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Date_creation;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
@@ -272,6 +277,18 @@ class User implements UserInterface
     public function setStatus(?Status $Status): self
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
 
         return $this;
     }
