@@ -39,6 +39,16 @@ class Project
      */
     private $timers;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Date_creation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="projects")
+     */
+    private $Team;
+
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
@@ -132,6 +142,30 @@ class Project
                 $timer->setIdProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->Team;
+    }
+
+    public function setTeam(?Team $Team): self
+    {
+        $this->Team = $Team;
 
         return $this;
     }
