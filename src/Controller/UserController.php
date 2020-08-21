@@ -44,6 +44,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $date = new \DateTime();
+            $createdDate = date('Y-m-d H:i:s');
+            $user->setDateCreation(new \DateTime($createdDate));
+
+            var_dump($user);
+            var_dump($createdDate);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

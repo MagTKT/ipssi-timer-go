@@ -37,6 +37,9 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $createdDate = date('Y-m-d H:i:s');
+            $project->setDateCreation(new \DateTime($createdDate));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($project);
             $entityManager->flush();
