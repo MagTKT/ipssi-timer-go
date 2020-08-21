@@ -49,6 +49,7 @@ class Team
      */
     private $projects;
 
+  
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teams")
      * @ORM\JoinColumn(nullable=false)
