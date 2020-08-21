@@ -35,8 +35,13 @@ class TeamController extends AbstractController
         $team = new Team();
         $form = $this->createForm(TeamType::class, $team);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $createdDate = date('Y-m-d H:i:s');
+            $team->setDateCreation(new \DateTime($createdDate));
+          
+            $id_user = $this->getUser();
+            $team->setTeamAdmin($id_user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($team);
             $entityManager->flush();
