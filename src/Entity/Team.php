@@ -44,6 +44,7 @@ class Team
      */
     private $Date_creation;
 
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teams")
      * @ORM\JoinColumn(nullable=false)
      */
