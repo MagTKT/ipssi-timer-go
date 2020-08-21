@@ -23,7 +23,7 @@
                             {% for project in projects %}
                                 <tr>
                                     <td>{{ project.nameProject }}</td>
-                                    <td>{{ 'Pas encore poussé' }}</td>
+                                    <td>{{ project.dateCreation ? project.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>
                                         <a class='color_one' href="{{ path('project_show', {'id': project.id}) }}">Détail</a>
                                         <a class='color_two' href="{{ path('project_edit', {'id': project.id}) }}">Editer</a>
