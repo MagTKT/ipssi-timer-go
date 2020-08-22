@@ -24,7 +24,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="L'email ne peut pas être vide")
      * @Assert\Email(
-     *     message = "L'email '{{ value }}' n'est pas valide."
+     *     message = "L'email {{ value }} n'est pas valide."
      * )
      */
     private $email;
@@ -95,6 +95,7 @@ class User implements UserInterface
         $this->userProjects = new ArrayCollection();
         $this->timers = new ArrayCollection();
         $this->teams = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
