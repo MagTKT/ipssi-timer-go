@@ -14,15 +14,33 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Id</th>
-                                        <td>{{ team.id }}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Name</th>
                                         <td>{{ team.name }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Admin</th>
+                                        <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date création</th>
+                                        <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
+                            {{'Membre(s) :'}} 
+                            <div class="p-t-10 btn btn--pill btn--green">
+                                <button class="btn">Ajouter membre</button>
+                            </div>
+                            {% for team in team.getUserTeams %}
+                                <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
+                            {% endfor %}
+                            {{'<br>Projet(s) :'}}
+                            <div class="p-t-10 btn btn--pill btn--green">
+                                <button class="btn">Nouveau projet</button>
+                            </div>
+                            {% for projet in team.getProjects %}
+                                <li>{{ projet.nameProject}}</li>
+                            {% endfor %}
                         </div>
                     </div>
                 <div class='button'>
