@@ -14,16 +14,16 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Nom du projet</th>
+                                    <th>Date de création</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {% for project in projects %}
                                 <tr>
-                                    <td>{{ project.id }}</td>
                                     <td>{{ project.nameProject }}</td>
+                                    <td>{{ project.dateCreation ? project.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>
                                         <a class='color_one' href="{{ path('project_show', {'id': project.id}) }}">Détail</a>
                                         <a class='color_two' href="{{ path('project_edit', {'id': project.id}) }}">Editer</a>
