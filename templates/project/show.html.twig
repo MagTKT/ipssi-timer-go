@@ -14,10 +14,6 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>Id</th>
-                                    <td>{{ project.id }}</td>
-                                </tr>
-                                <tr>
                                     <th>Nom du projet</th>
                                     <td>{{ project.nameProject }}</td>
                                 </tr>
@@ -26,7 +22,7 @@
                     </div>
                 </div>
                 <div class='button'>
-                    <button class='btn btn-info'><a href="{{ path('project_edit', {'id': project.id}) }}">edit</a></button>
+                    <button class='btn btn-info'><a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a></button>
                     {{ include('project/_delete_form.html.twig') }}
                 </div>
             </div>
