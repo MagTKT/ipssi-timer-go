@@ -6,6 +6,7 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -21,6 +22,9 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le nom est trop petit",
+     * max="255", maxMessage="Le nom est trop long")
      */
     private $name_project;
 
@@ -38,6 +42,16 @@ class Project
      * @ORM\OneToMany(targetEntity=Timer::class, mappedBy="idProject")
      */
     private $timers;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Date_creation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="projects")
+     */
+    private $Team;
 
     public function __construct()
     {
@@ -132,6 +146,30 @@ class Project
                 $timer->setIdProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->Team;
+    }
+
+    public function setTeam(?Team $Team): self
+    {
+        $this->Team = $Team;
 
         return $this;
     }

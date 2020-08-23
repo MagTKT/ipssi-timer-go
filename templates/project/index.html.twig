@@ -6,24 +6,23 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="contain-block">
-            <h1>Listes des Projets</h1>
             <div class="wrapper wrapper--w780">
-                <div class='url card-3bis'><a href="{{ path('project_new') }}">Creer un nouveau projet</a></div>
+                <div class='url card-3bis'><a href="{{ path('project_new') }}">Créer un nouveau projet</a></div>
                 <div class="card card-3">
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Nom du projet</th>
+                                    <th>Date de création</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {% for project in projects %}
                                 <tr>
-                                    <td>{{ project.id }}</td>
                                     <td>{{ project.nameProject }}</td>
+                                    <td>{{ project.dateCreation ? project.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>
                                         <a class='color_one' href="{{ path('project_show', {'id': project.id}) }}">Détail</a>
                                         <a class='color_two' href="{{ path('project_edit', {'id': project.id}) }}">Editer</a>
@@ -31,7 +30,7 @@
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="3">no records found</td>
+                                    <td colspan="3">Aucun projet</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

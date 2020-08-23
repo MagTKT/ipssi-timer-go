@@ -6,7 +6,6 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="contain-block">
-            <h1>Team</h1>
             <div class="wrapper wrapper--w780">
                 <div class='url card-3bis'><a href="{{ path('team_index') }}">Retour à la liste</a></div>
                     <div class="card card-3">
@@ -14,19 +13,37 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Id</th>
-                                        <td>{{ team.id }}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Name</th>
                                         <td>{{ team.name }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Admin</th>
+                                        <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date création</th>
+                                        <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
+                            {{'Membre(s) :'}} 
+                            <div class="p-t-10 btn btn--pill btn--green">
+                                <button class="btn">Ajouter membre</button>
+                            </div>
+                            {% for team in team.getUserTeams %}
+                                <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
+                            {% endfor %}
+                            {{'<br>Projet(s) :'}}
+                            <div class="p-t-10 btn btn--pill btn--green">
+                                <button class="btn">Nouveau projet</button>
+                            </div>
+                            {% for projet in team.getProjects %}
+                                <li>{{ projet.nameProject}}</li>
+                            {% endfor %}
                         </div>
                     </div>
                 <div class='button'>
-                    <button class='btn btn-info'><a href="{{ path('team_edit', {'id': team.id}) }}">editer</a></button>
+                    <button class='btn btn-info'><a href="{{ path('team_edit', {'id': team.id}) }}">Editer</a></button>
                     {{ include('team/_delete_form.html.twig') }}
                 </div>
             </div>

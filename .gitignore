@@ -7,6 +7,10 @@
 # Email spool folder
 /app/spool/*
 
+# Environnment 
+.env
+.env.test
+
 # Cache, session files and logs (Symfony3)
 /var/cache/*
 /var/logs/*
@@ -53,3 +57,7 @@
 
 # pour version du composer
 docker-compose.yml
+
+# environnement
+.env
+.env.test
