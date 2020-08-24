@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserTeam{% endblock %}
+
+{% block body %}
+    <h1>UserTeam</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user_team.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_creation</th>
+                <td>{{ user_team.DateCreation ? user_team.DateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_team_index') }}">back to list</a>
+
+    <a href="{{ path('user_team_edit', {'id': user_team.id}) }}">edit</a>
+
+    {{ include('user_team/_delete_form.html.twig') }}
+{% endblock %}
