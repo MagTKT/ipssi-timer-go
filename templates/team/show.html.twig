@@ -6,20 +6,25 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="contain-block">
-            <h1>Team</h1>
             <div class="wrapper wrapper--w780">
-                <div class='url card-3bis'><a href="{{ path('team_index') }}">Retour à la liste</a></div>
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('team_index') }}">Retour à la liste</a>
+                </div>
                     <div class="card card-3">
                         <div class="card-body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Id</th>
-                                        <td>{{ team.id }}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Name</th>
                                         <td>{{ team.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Admin</th>
+                                        <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date création</th>
+                                        <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -31,6 +36,16 @@
                                 </div>
                                 {% endif %}
                             {% endif %}
+                            {% for team in team.getUserTeams %}
+                                <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
+                            {% endfor %}
+                            <div class="p-t-10 btn btn--pill btn--green">
+                                <a class='btn'>Ajout nouveau projet</a>
+                            </div>
+                            {% for projet in team.getProjects %}
+                                <li>{{ projet.nameProject}}</li>
+                            {% endfor %}
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -43,7 +58,7 @@
                 </div>
                     {% elseif app.user.roles == 'ROLE_ADMIN' %}
                 <div class='button'>
-                    <button class='btn btn-info'><a href="{{ path('team_edit', {'id': team.id}) }}">editer</a></button>
+                    <a class='btn btn-info' href="{{ path('team_edit', {'id': team.id}) }}">Editer</a>
                     {{ include('team/_delete_form.html.twig') }}
                 </div>
                     {% endif %}

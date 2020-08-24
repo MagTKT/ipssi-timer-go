@@ -6,10 +6,11 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class='contain-block'>
-            <h1>Edit User</h1>
-            <div class='url card-3bis'><a href="{{ path('user_index') }}">back to list</a></div>
-                {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="button">
+                <a class='btn btn-info' href="{{ path('user_show', {'id': user.id}) }}">Profil utilisateur</a>
+            </div>
+            {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
         </div>
     </div>
-    
+
 {% endblock %}
