@@ -24,8 +24,10 @@
                             {% for team in teams %}
                                 <tr>
                                     <td>{{ team.name }}</td>
+
                                     <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
                                     <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+
                                     <td>
                                         <a class='color_one' href="{{ path('team_show', {'id': team.id}) }}">Détail</a>
                                         <a class='color_two' href="{{ path('team_edit', {'id': team.id}) }}">Editer</a>
