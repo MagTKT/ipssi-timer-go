@@ -10,7 +10,10 @@
     text-shadow: none;
 }
 
-
+.ligner{
+    display: grid;
+    color: white;
+}
 /*
  * A better looking default horizontal rule
  */
