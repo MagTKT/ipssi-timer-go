@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Project{% endblock %}
+
+{% block body %}
+
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class='contain-block'>
+            <h1>Ajouter projet</h1>
+            <div class="wrapper wrapper--w780">
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('team_show', {'id': idTeam.id}) }}">Retour</a>
+                </div>
+                {{ include('project/_formToTeam.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
