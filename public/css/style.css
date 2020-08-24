@@ -10,10 +10,12 @@
     text-shadow: none;
 }
 
-.ligner{
+.ligner {
     display: grid;
     color: white;
 }
+
+
 /*
  * A better looking default horizontal rule
  */
@@ -440,4 +442,22 @@ input {
 a {
     color: white !important;
     text-decoration: none !important;
+}
+
+
+/** DESIGN PAGE USERS **/
+
+@media (max-width:1024px) {
+    .card-body .table {
+        display: flex;
+    }
+    .card-body .table tr {
+        display: flex;
+        flex-direction: column;
+        /* border-bottom: 2px solid #ddd; */
+    }
+    .card-body .table td {
+        border-bottom: 2px solid #ddd;
+        border-top: none;
+    }
 }
