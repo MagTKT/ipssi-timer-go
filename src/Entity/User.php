@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -22,17 +22,24 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="L'email ne peut pas être vide")
+     * @Assert\Email(
+     *     message = "L'email {{ value }} n'est pas valide."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\NotBlank
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Il vous faut un mot de passe")
+     * @Assert\Length(min="5", minMessage="Le mot de passe est trop petit")
      */
     private $password;
 
@@ -48,11 +55,17 @@ class User implements UserInterface
   
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le prénom est trop petit",
+     * max="255", maxMessage="Le prénom est trop long")
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le nom est trop petit",
+     * max="255", maxMessage="Le nom est trop long")
      */
     private $lastName;
 
@@ -66,11 +79,23 @@ class User implements UserInterface
      */
     private $timers;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Date_creation;
+      
+    /**
+     * @ORM\OneToMany(targetEntity=Team::class, mappedBy="TeamAdmin")
+     */
+    private $teams;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->timers = new ArrayCollection();
+        $this->teams = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId(): ?int
@@ -272,6 +297,49 @@ class User implements UserInterface
     public function setStatus(?Status $Status): self
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
+      
+        return $this;
+    }
+  
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->setTeamAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->contains($team)) {
+            $this->teams->removeElement($team);
+            // set the owning side to null (unless already changed)
+            if ($team->getTeamAdmin() === $this) {
+                $team->setTeamAdmin(null);
+            }
+        }
 
         return $this;
     }

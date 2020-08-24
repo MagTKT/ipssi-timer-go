@@ -6,6 +6,7 @@ use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TeamRepository::class)
@@ -21,6 +22,9 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(min="3", minMessage="Le nom est trop petit",
+     * max="255", maxMessage="Le nom est trop long")
      */
     private $name;
 
@@ -39,10 +43,28 @@ class Team
      */
     private $timers;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $Date_creation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="Team")
+     */
+    private $projects;
+
+  
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="teams")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $TeamAdmin;
+
     public function __construct()
     {
         $this->userTeams = new ArrayCollection();
         $this->timers = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +152,61 @@ class Team
             // set the owning side to null (unless already changed)
             if ($timer->getIdTeam() === $this) {
                 $timer->setIdTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->Date_creation;
+    }
+
+    public function setDateCreation(?\DateTimeInterface $Date_creation): self
+    {
+        $this->Date_creation = $Date_creation;
+        
+        return $this;
+    }
+  
+    public function getTeamAdmin(): ?User
+    {
+        return $this->TeamAdmin;
+    }
+
+    public function setTeamAdmin(?User $TeamAdmin): self
+    {
+        $this->TeamAdmin = $TeamAdmin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getTeam() === $this) {
+                $project->setTeam(null);
             }
         }
 
