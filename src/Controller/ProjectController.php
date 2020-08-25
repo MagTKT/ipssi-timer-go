@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\{Project, Team};
+use App\Entity\{Project, Team, UserProject};
 use App\Form\{ProjectType, ProjectToTeamType};
-use App\Repository\ProjectRepository;
+use App\Repository\{ProjectRepository,UserTeamRepository};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,26 +57,40 @@ class ProjectController extends AbstractController
      * @Route("/addProject/{idTeam}", name="project_add_team", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function addProjetToTeam(Request $request, ProjectRepository $ProjectRepository,Team $idTeam): Response
+    public function addProjetToTeam(Request $request, ProjectRepository $ProjectRepo, Team $idTeam, UserTeamRepository $UserTeamRepo ): Response
     {
         $form = $this->createForm(ProjectToTeamType::class);
         $form->handleRequest($request);
 
 
         $projectInTeam = $idTeam->getProjects();
+
+        $userTeamList = $UserTeamRepo->findBy(array('idTeam'=>$idTeam->getId()));
+
         if ($form->isSubmitted() && $form->isValid()) {
-            
             // var_dump('PASSE');
             $FormProjet = $form->get('name_project')->getData();
             if($FormProjet){
                 $idProjet = $FormProjet->getId();
 
-                $project = $ProjectRepository->findOneBy(array('id'=>$idProjet));
+                $project = $ProjectRepo->findOneBy(array('id'=>$idProjet));
 
                 if($project){
                     $project->setTeam($idTeam);
 
                     $entityManager = $this->getDoctrine()->getManager();
+                    
+                    $createdDate = date('Y-m-d H:i:s');
+                    foreach ($userTeamList as $userTeam) {
+                        $user = $userTeam->getIdUser();
+                        $userProject = new UserProject();
+                        $userProject->setIdUser($user);
+                        $userProject->setIdProject($FormProjet);
+                        $userProject->setDateCreation(new \DateTime($createdDate));
+
+                        $entityManager->persist($userProject);
+                    }
+
                     $entityManager->persist($project);
                     $entityManager->flush();
 
