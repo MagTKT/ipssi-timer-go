@@ -27,13 +27,22 @@
                                         <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Membre de l'équipe</th>
+                                        <th>Membres</th>
                                         <td>
                                             {% for team in team.getUserTeams %}
                                                 <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
                                             {% endfor %}
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>Projets</th>
+                                        <td>
+                                            {% for projet in team.getProjects %}
+                                                <li>{{ projet.nameProject}}</li>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                                                
                                 </tbody>
                             </table>
                             {% if app.user %}
@@ -47,9 +56,6 @@
                             <div class="p-t-10 btn btn--pill btn--green">
                                 <a class='btn' href="{{ path('project_add_team', {'idTeam': team.id}) }}">Ajouter nouveau projet</a>
                             </div>
-                            {% for projet in team.getProjects %}
-                                <li>{{ projet.nameProject}}</li>
-                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -57,7 +63,7 @@
                 {% if app.user %}
                     {% if app.user.id == team.TeamAdmin.id %}
                 <div class='button'>
-                    <button class='btn btn-info'><a href="{{ path('team_edit', {'id': team.id}) }}">editer</a></button>
+                    <button class='btn btn-info'><a href="{{ path('team_edit', {'id': team.id}) }}">Editer</a></button>
                     {{ include('team/_delete_form.html.twig') }}
                 </div>
                     {% elseif app.user.roles == 'ROLE_ADMIN' %}
