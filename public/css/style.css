@@ -461,3 +461,7 @@ a {
         border-top: none;
     }
 }
+
+.ligner textarea#story {
+    color: black;
+}
