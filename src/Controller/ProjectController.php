@@ -62,10 +62,10 @@ class ProjectController extends AbstractController
         $form = $this->createForm(ProjectToTeamType::class);
         $form->handleRequest($request);
 
-
         $projectInTeam = $idTeam->getProjects();
-
         $userTeamList = $UserTeamRepo->findBy(array('idTeam'=>$idTeam->getId()));
+
+        $msg = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
             // var_dump('PASSE');
@@ -79,7 +79,7 @@ class ProjectController extends AbstractController
                     $project->setTeam($idTeam);
 
                     $entityManager = $this->getDoctrine()->getManager();
-                    
+
                     $createdDate = date('Y-m-d H:i:s');
                     foreach ($userTeamList as $userTeam) {
                         $user = $userTeam->getIdUser();
@@ -96,6 +96,8 @@ class ProjectController extends AbstractController
 
                 }
 
+            }else{
+                $msg = 'Plus de projet à ajouter';
             }
 
             // return $this->redirectToRoute('project_index');
@@ -105,6 +107,7 @@ class ProjectController extends AbstractController
             'form' => $form->createView(),
             'idTeam' => $idTeam,
             'projectInTeam' => $projectInTeam,
+            'msg' => $msg
         ]);
     }
 
