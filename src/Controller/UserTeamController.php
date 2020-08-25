@@ -33,8 +33,7 @@ class UserTeamController extends AbstractController
         $userTeam = new UserTeam();
         $form = $this->createForm(UserTeamType::class, $userTeam);
         $form->handleRequest($request);
-        //var_dump($request);
-        //die();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $createdDate = date('Y-m-d H:i:s');
             $userTeam->setDateCreation(new \DateTime($createdDate));
