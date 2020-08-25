@@ -11,7 +11,17 @@
             <a class="p-t-10 btn btn--pill btn--green">
                 <button class="btn">{{ button_label|default('Envoyer') }}</button>
             </a>
+            {% if msg %}
+                <div class="alert alert-success">
+                    {{msg}}
+                </div>
+            {% endif %}
             {{ form_end(form) }}
+            <br>
+            Membre de l'équipe :
+            {% for user in userInTeam %}
+                <li>{{ user.idUser.name }} {{ user.idUser.lastName }}</li>
+            {% endfor %}
         </div>
     </div>
 </div>          

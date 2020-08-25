@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\{Team, UserTeam};
+use App\Entity\{Team, UserTeam, User};
 use App\Form\UserTeamType;
-use App\Repository\UserTeamRepository;
+use App\Repository\{UserTeamRepository, UserRepository, TeamRepository};
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,29 +29,47 @@ class UserTeamController extends AbstractController
     /**
      * @Route("/new/{idTeam}", name="user_team_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Team $idTeam): Response
+    public function new(Request $request, UserTeamRepository $UserTeamRepository, Team $idTeam): Response
     {
         $userTeam = new UserTeam();
+        
+        $GLOBALS['idTeam'] = $idTeam->getId();
+        
         $form = $this->createForm(UserTeamType::class, $userTeam);
         $form->handleRequest($request);
 
+        $msg = '';
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $createdDate = date('Y-m-d H:i:s');
-            $userTeam->setDateCreation(new \DateTime($createdDate));
+            
+            $FormUserTeam = $form->get('idUser')->getData();
+            $idUser = $FormUserTeam->getId();
 
-            $userTeam->setIdTeam($idTeam);
+            $oneUser = $UserTeamRepository->findBy(array('idTeam'=>$idTeam->getId(),'idUser'=>$idUser));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userTeam);
-            $entityManager->flush();
+            if(!$oneUser){
+                $createdDate = date('Y-m-d H:i:s');
+                $userTeam->setDateCreation(new \DateTime($createdDate));
 
-            return $this->redirectToRoute('team_index');
+                $userTeam->setIdTeam($idTeam);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($userTeam);
+                $entityManager->flush();                
+            }else{
+                $msg = 'Cet utilisateur est déjà dans l\'équipe';
+            }
+
+            //return $this->redirectToRoute('team_index');
         }
+        $userInTeam = $UserTeamRepository->findBy(array('idTeam'=>$idTeam->getId()));
 
         return $this->render('user_team/new.html.twig', [
             'user_team' => $userTeam,
             'form' => $form->createView(),
             'idTeam' => $idTeam,
+            'userInTeam' => $userInTeam,
+            'msg' => $msg
 
         ]);
     }
