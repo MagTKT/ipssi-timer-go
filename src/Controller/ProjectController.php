@@ -67,17 +67,22 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             // var_dump('PASSE');
-            $idProjet = $form->get('name_project')->getData()->getId();
+            $FormProjet = $form->get('name_project')->getData();
+            if($FormProjet){
+                $idProjet = $FormProjet->getId();
 
-            $project = $ProjectRepository->findOneBy(array('id'=>$idProjet));
+                $project = $ProjectRepository->findOneBy(array('id'=>$idProjet));
 
-            if($project){
-                $project->setTeam($idTeam);
+                if($project){
+                    $project->setTeam($idTeam);
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($project);
+                    $entityManager->flush();
+
+                }
+
             }
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($project);
-            $entityManager->flush();
 
             // return $this->redirectToRoute('project_index');
         }
