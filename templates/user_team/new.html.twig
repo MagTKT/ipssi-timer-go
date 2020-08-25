@@ -3,9 +3,16 @@
 {% block title %}New UserTeam{% endblock %}
 
 {% block body %}
-    <h1>Create new UserTeam</h1>
 
-    {{ include('user_team/_form.html.twig') }}
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class='contain-block'>
+            <div class="wrapper wrapper--w780">
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('team_show', {'id': idTeam.id}) }}">Retour à la liste</a>
+                </div>
+                {{ include('user_team/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('user_team_index') }}">back to list</a>
 {% endblock %}

@@ -50,6 +50,7 @@ class UserTeamController extends AbstractController
         return $this->render('user_team/new.html.twig', [
             'user_team' => $userTeam,
             'form' => $form->createView(),
+            'idTeam' => $idTeam,
         ]);
     }
 
