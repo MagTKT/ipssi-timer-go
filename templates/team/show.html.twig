@@ -45,12 +45,11 @@
                                 {% endif %}
                             {% endif %}
                             <div class="p-t-10 btn btn--pill btn--green">
-                                <a class='btn'>Ajout nouveau projet</a>
+                                <a class='btn' href="{{ path('project_add_team', {'idTeam': team.id}) }}">Ajouter nouveau projet</a>
                             </div>
                             {% for projet in team.getProjects %}
                                 <li>{{ projet.nameProject}}</li>
                             {% endfor %}
-                        </div>
                         </div>
                     </div>
                 </div>
