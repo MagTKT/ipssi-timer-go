@@ -59,27 +59,33 @@ class ProjectController extends AbstractController
      */
     public function addProjetToTeam(Request $request, ProjectRepository $ProjectRepository,Team $idTeam): Response
     {
-        $projectToTeam = new Project();
-        $form = $this->createForm(ProjectToTeamType::class, $projectToTeam);
+        $form = $this->createForm(ProjectToTeamType::class);
         $form->handleRequest($request);
 
-        
+
+        $projectInTeam = $idTeam->getProjects();
         if ($form->isSubmitted() && $form->isValid()) {
             
-            
-            // $oneProject = $this->ProjectRepository->findOneBy(array('id'=>$form));
+            // var_dump('PASSE');
+            $idProjet = $form->get('name_project')->getData()->getId();
 
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($projectToTeam);
-            // $entityManager->flush();
+            $project = $ProjectRepository->findOneBy(array('id'=>$idProjet));
+
+            if($project){
+                $project->setTeam($idTeam);
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($project);
+            $entityManager->flush();
 
             // return $this->redirectToRoute('project_index');
         }
 
         return $this->render('project/newProjectToTeam.html.twig', [
-            'project' => $projectToTeam,
             'form' => $form->createView(),
-            'idTeam' => $idTeam
+            'idTeam' => $idTeam,
+            'projectInTeam' => $projectInTeam,
         ]);
     }
 

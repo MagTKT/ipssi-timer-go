@@ -1,4 +1,3 @@
-
 <div class="wrapper wrapper--w780">
     <div class="card card-3">
         <div class="card-heading"></div>
@@ -6,13 +5,18 @@
             {{ form_start(form) }}
                 <div class="input-group input--style-3">
                     <div class='input'>
-                        {{ form_row(form.name_project) }}
+                        {{ form_widget(form) }}
                     </div> 
                 </div>
                 <div class="p-t-10 btn btn--pill btn--green">
                     <button class="btn">{{ button_label|default('Ajouter') }}</button>
                 </div>
             {{ form_end(form) }}
+            <br>
+            Projet de l'équipe :
+            {% for projet in projectInTeam %}
+                <li>{{ projet.nameProject }}</li>
+            {% endfor %}
         </div>
     </div>
 </div>
