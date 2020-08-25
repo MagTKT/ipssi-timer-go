@@ -34,7 +34,7 @@ MYSQL_PASSWORD='mot de passe de la base'
 <br><br>
 puis de nouveau dans votre terminal:
 <br><br>
-docker-compose up --build
+docker-compose up --build -d
 
 Effectuer les migrations:
 -------------------------
@@ -45,7 +45,10 @@ docker-compose exec web php bin/console make:migration
 <br><br>
 docker-compose exec web php bin/console doctrine:migration:migrate
 <br><br>
-Puis naviguer vers localhost:8010
+Puis naviguer :
+<br><br>
+Pour mac: vers localhost:8010
+Pour Windows : vers 192.168.99.100
 
 
 Parametrage specifique (en cas de soucis):
@@ -53,6 +56,6 @@ Parametrage specifique (en cas de soucis):
 
 Sous windows : le docker-compose doit etre en version: '3.6'
 <br><br>
-Sous mac : le docker-compose doit etre en version: '3.7'
+Sous mac ou linux : le docker-compose doit etre en version: '3.7'
 
 
