@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserTeam index{% endblock %}
+
+{% block body %}
+    <h1>UserTeam index</h1>
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="contain-block">
+        <div class="wrapper wrapper--w780">
+            <div class="button">
+                <a class='btn btn-info' href="{{ path('user_team_new') }}">Créer une nouvelle team</a>
+            </div>
+            <div class="card card-3">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Date_creation</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user_team in user_teams %}
+                            <tr>
+                                <td>{{ user_team.id }}</td>
+                                <td>{{ user_team.DateCreation ? user_team.DateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('user_team_show', {'id': user_team.id}) }}">show</a>
+                                    <a href="{{ path('user_team_edit', {'id': user_team.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

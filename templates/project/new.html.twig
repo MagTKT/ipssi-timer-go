@@ -8,7 +8,9 @@
         <div class='contain-block'>
             <h1>Creer un nouveau projet</h1>
             <div class="wrapper wrapper--w780">
-                <div class='url card-3bis'><a href="{{ path('project_index') }}">back to list</a></div>
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('project_index') }}">Retour à la liste</a>
+                </div>
                 {{ include('project/_form.html.twig') }}
             </div>
         </div>

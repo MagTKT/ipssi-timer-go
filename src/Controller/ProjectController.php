@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
-use App\Form\ProjectType;
+use App\Entity\{Project, Team};
+use App\Form\{ProjectType, ProjectToTeamType};
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +50,42 @@ class ProjectController extends AbstractController
         return $this->render('project/new.html.twig', [
             'project' => $project,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/addProject/{idTeam}", name="project_add_team", methods={"GET","POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function addProjetToTeam(Request $request, ProjectRepository $ProjectRepository,Team $idTeam): Response
+    {
+        $form = $this->createForm(ProjectToTeamType::class);
+        $form->handleRequest($request);
+
+
+        $projectInTeam = $idTeam->getProjects();
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // var_dump('PASSE');
+            $idProjet = $form->get('name_project')->getData()->getId();
+
+            $project = $ProjectRepository->findOneBy(array('id'=>$idProjet));
+
+            if($project){
+                $project->setTeam($idTeam);
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($project);
+            $entityManager->flush();
+
+            // return $this->redirectToRoute('project_index');
+        }
+
+        return $this->render('project/newProjectToTeam.html.twig', [
+            'form' => $form->createView(),
+            'idTeam' => $idTeam,
+            'projectInTeam' => $projectInTeam,
         ]);
     }
 

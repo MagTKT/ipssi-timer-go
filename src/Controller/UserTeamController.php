@@ -33,8 +33,12 @@ class UserTeamController extends AbstractController
         $userTeam = new UserTeam();
         $form = $this->createForm(UserTeamType::class, $userTeam);
         $form->handleRequest($request);
+<<<<<<< HEAD
         //var_dump($request);
         //die();
+=======
+
+>>>>>>> 5bfd67a9369f97535b39ecb5ea612c5842cf495f
         if ($form->isSubmitted() && $form->isValid()) {
             $createdDate = date('Y-m-d H:i:s');
             $userTeam->setDateCreation(new \DateTime($createdDate));
@@ -51,6 +55,10 @@ class UserTeamController extends AbstractController
         return $this->render('user_team/new.html.twig', [
             'user_team' => $userTeam,
             'form' => $form->createView(),
+<<<<<<< HEAD
+=======
+            'idTeam' => $idTeam,
+>>>>>>> 5bfd67a9369f97535b39ecb5ea612c5842cf495f
         ]);
     }
 

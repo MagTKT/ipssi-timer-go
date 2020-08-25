@@ -6,16 +6,21 @@
 
     <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
         <div class="contain-block">
-            <h1>User</h1>
             <div class="wrapper wrapper--w780">
-                <div class='url card-3bis'><a href="{{ path('user_index') }}">Retour à la liste</a></div>
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('user_index') }}">Retour à la liste</a>
+                </div>
                     <div class="card card-3">
                         <div class="card-body">
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Id</th>
-                                        <td>{{ user.id }}</td>
+                                        <th>Prénom</th>
+                                        <td>{{ user.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <td>{{ user.lastName }}</td>
                                     </tr>
                                     <tr>
                                         <th>Email</th>
@@ -27,14 +32,20 @@
                                     </tr>
                                     <tr>
                                         <th>Password</th>
-                                        <td>{{ user.password }}</td>
+                                        <td>{{ "C'est privé :)" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Equipe gérée</th>
+                                        {% for team in user.getTeams %}
+                                            <td>{{ team.name }}</td>
+                                        {% endfor %}
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 <div class='button'>
-                    <button class='btn btn-info'><a href="{{ path('user_edit', {'id': user.id}) }}">edit</a></button>
+                    <a class='btn btn-info' href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
                     {{ include('user/_delete_form.html.twig') }}
                 </div>
             </div>
