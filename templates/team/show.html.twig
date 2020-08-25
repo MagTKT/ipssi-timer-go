@@ -26,19 +26,24 @@
                                         <th>Date création</th>
                                         <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Membre de l'équipe</th>
+                                        <td>
+                                            {% for team in team.getUserTeams %}
+                                                <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                             {% if app.user %}
                                 {% if app.user.id == team.TeamAdmin.id %}
-                                <div class="button">
-                                    <div class="p-t-10 btn btn--pill btn--green">
-                                    <a class='btn' href="{{ path('user_team_new', {'idTeam': team.id}) }}">Ajouter membre</a>
-                                </div>
+                                    <div class="button">
+                                        <div class="p-t-10 btn btn--pill btn--green">
+                                        <a class='btn' href="{{ path('user_team_new', {'idTeam': team.id}) }}">Ajouter membre</a>
+                                    </div>
                                 {% endif %}
                             {% endif %}
-                            {% for team in team.getUserTeams %}
-                                <li>{{ team.idUser.name }} {{ team.idUser.lastName }}</li>
-                            {% endfor %}
                             <div class="p-t-10 btn btn--pill btn--green">
                                 <a class='btn'>Ajout nouveau projet</a>
                             </div>

@@ -15,24 +15,22 @@
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Admin</th>
+                                <th>Admin du groupe</th>
                                 <th>Date de création</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for team in teams %}
-                                <tr>
-                                    <td>{{ team.name }}</td>
-
-                                    <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
-                                    <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-
-                                    <td>
-                                        <a class='color_one' href="{{ path('team_show', {'id': team.id}) }}">Détail</a>
-                                        <a class='color_two' href="{{ path('team_edit', {'id': team.id}) }}">Editer</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ team.name }}</td>
+                                <td>{{ team.getTeamAdmin.name }} {{ team.getTeamAdmin.lastName }}</td>
+                                <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a class='color_one' href="{{ path('team_show', {'id': team.id}) }}">Détail</a>
+                                    <a class='color_two' href="{{ path('team_edit', {'id': team.id}) }}">Editer</a>
+                                </td>
+                            </tr>
                             {% else %}
                                 <tr>
                                     <td colspan="3">Aucune équipe</td>
