@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Timer{% endblock %}
+
+{% block body %}
+    <h1>Timer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ timer.id }}</td>
+            </tr>
+            <tr>
+                <th>DateTime_Debut</th>
+                <td>{{ timer.DateTimeDebut ? timer.DateTimeDebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateTime_Fin</th>
+                <td>{{ timer.DateTimeFin ? timer.DateTimeFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Cumul_s</th>
+                <td>{{ timer.CumulS }}</td>
+            </tr>
+            <tr>
+                <th>TimerComment</th>
+                <td>{{ timer.TimerComment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('timer_index') }}">back to list</a>
+
+    <a href="{{ path('timer_edit', {'id': timer.id}) }}">edit</a>
+
+    {{ include('timer/_delete_form.html.twig') }}
+{% endblock %}
