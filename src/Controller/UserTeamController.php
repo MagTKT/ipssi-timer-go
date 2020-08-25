@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\{Team, UserTeam, User, UserProject};
 use App\Form\UserTeamType;
-use App\Repository\{UserTeamRepository, ProjectRepository, UserProjectRepository};
+use App\Repository\{UserTeamRepository, ProjectRepository};
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class UserTeamController extends AbstractController
     /**
      * @Route("/new/{idTeam}", name="user_team_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserTeamRepository $UserTeamRepo, Team $idTeam, UserProjectRepository $UserProjectRepo, ProjectRepository $ProjectRepo): Response
+    public function new(Request $request, UserTeamRepository $UserTeamRepo, Team $idTeam, ProjectRepository $ProjectRepo): Response
     {
         $userTeam = new UserTeam();
         
