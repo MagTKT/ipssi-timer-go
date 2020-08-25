@@ -14,13 +14,17 @@ label{
 .button{
   display: flex;
   justify-content: space-around;
+  margin: 20px 0px;
 }
 
 .url{
   text-align: center;
   margin: 35px 0px;
 }
-
+.input textarea{
+  display: block;
+  margin-bottom: 25px;
+}
 /* ==========================================================================
    #FONT
    ========================================================================== */

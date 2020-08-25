@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Temps index{% endblock %}
+
+{% block body %}
+
+    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="contain-block">
+            <div class="wrapper wrapper--w780">
+                <div class="button">
+                    <a class='btn btn-info' href="{{ path('timer_new') }}">Créer un nouvel enregistrement de temps</a>
+                </div>
+                <div class="card card-3">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Groupe</th>
+                                    <th>Projet</th>
+                                    <th>Temps complet de l'équipe</th>
+                                    <th>dernieres date de modification</th>
+                                </tr>
+                            </thead>
+                            {% for timer in timer %}
+                            <tr>
+                                <td>{{ timer.cumul_s }}</td>
+                                {% endfor %}
+                            {# <tbody>
+                                {% for team in teams %}
+                                <tr>
+                                    <td>{{ team.name }}</td>
+                                    {% endfor %}
+                                {% for project in projects %}
+                                    <td>{{ project.nameProject }}</td>   
+                                </tr>
+                                <tr>
+                                    <td colspan="5">Aucun Temps</td>
+                                </tr>
+                            {% endfor %} #}
+                            </tbody>
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
