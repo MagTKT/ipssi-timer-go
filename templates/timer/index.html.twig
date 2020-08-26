@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Temps index{% endblock %}
+{% block title %}Timer index{% endblock %}
 
 {% block body %}
 
@@ -15,33 +15,38 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Groupe</th>
-                                    <th>Projet</th>
-                                    <th>Temps complet de l'équipe</th>
-                                    <th>dernieres date de modification</th>
+                                    <th>Id</th>
+                                    <th>DateT Debut</th>
+                                    <th>Date Fin</th>
+                                    <th>Cumul</th>
+                                    <th>Commentaire</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            {% for timer in timer %}
-                            <tr>
-                                <td>{{ timer.cumul_s }}</td>
-                                {% endfor %}
-                            {# <tbody>
-                                {% for team in teams %}
+                            <tbody>  
+                            {% for timer in timers %}
                                 <tr>
-                                    <td>{{ team.name }}</td>
-                                    {% endfor %}
-                                {% for project in projects %}
-                                    <td>{{ project.nameProject }}</td>   
+                                    <td>{{ timer.id }}</td>
+                                    <td>{{ timer.DateTimeDebut ? timer.DateTimeDebut|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ timer.DateTimeFin ? timer.DateTimeFin|date('Y-m-d H:i:s') : '' }}</td>
+                                    <td>{{ timer.CumulS }}</td>
+                                    <td>{{ timer.TimerComment }}</td>
+                                    <td>
+                                        <a href="{{ path('timer_show', {'id': timer.id}) }}">show</a>
+                                        <a href="{{ path('timer_edit', {'id': timer.id}) }}">edit</a>
+                                    </td>
                                 </tr>
+                            {% else %}
                                 <tr>
-                                    <td colspan="5">Aucun Temps</td>
+                                    <td colspan="6">no records found</td>
                                 </tr>
-                            {% endfor %} #}
+                            {% endfor %}
                             </tbody>
-                        </table>  
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

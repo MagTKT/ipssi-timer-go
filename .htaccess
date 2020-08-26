@@ -1,1 +1,4 @@
-RewriteRule ^/  https://timer-go.agence-srp.fr/ [L]
+RewriteEngine on
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*)$ https://timer-go.agence-srp.fr/public [L,R=301,NC]
+
