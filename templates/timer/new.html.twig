@@ -1,41 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Temps index{% endblock %}
+{% block title %}New Timer{% endblock %}
 
 {% block body %}
+    <h1>Create new Timer</h1>
 
-    <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
-        <div class="contain-block">
-            <div class="wrapper wrapper--w780">
-                <div class="button">
-                    <a class='btn btn-info' href="{{ path('timer_index') }}">Retour à la liste</a>
-                </div>
-                <div class="card card-3">
-                    <div class="card-body">
-                        <table class="table">
-                            <div class="ligner">
-                                <label for="pet-select">Choisir le projet</label>
-                                <select name="pets" id="pet-select">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                </select>
-                            </div>
-                        </table>  
-                        <form name="chronoForm">
-                            <input type="text" name="chronotime" id="chronotime" value="0:00:00:00"/>
-                            <input type="button" class="btn btn-info" name="startstop" value="start!" onClick="chronoStart()" />
-                            <input type="button" class="btn btn-info" name="reset" value="reset!" onClick="chronoReset()" />
-                        </form>
-                        <div class="ligner">
-                            <label for="story">Mettez un commentaire</label>
-                            <textarea id="story" name="story"rows="5" cols="33">
-                            Qu'avez vous fait aujourd'hui ?
-                            </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+    {{ include('timer/_form.html.twig') }}
+
+    <a href="{{ path('timer_index') }}">back to list</a>
 {% endblock %}

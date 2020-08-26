@@ -23,7 +23,7 @@ class TimerController extends AbstractController
     public function index(TimerRepository $timerRepository): Response
     {
         return $this->render('timer/index.html.twig', [
-            'timers' => $timerRepository->findAll(),
+            'timer' => $timerRepository->findAll(),
         ]);
     }
 
@@ -38,11 +38,22 @@ class TimerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $project = $form->get('idProject')->getData();
+            $tarace = $project->getTeam();
+            $timer->setIdTeam($tarace);
+ 
+            $createdDate = date('Y-m-d H:i:s');
+            $timer->setDateTimeDebut(new \DateTime($createdDate));
+            $id_user = $this->getUser();
+            $timer->setIdUser($id_user);
+            var_dump($timer);
+        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($timer);
             $entityManager->flush();
 
             return $this->redirectToRoute('timer_index');
+        
         }
 
         return $this->render('timer/new.html.twig', [
