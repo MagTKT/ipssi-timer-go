@@ -11,6 +11,11 @@
                 <div class="p-t-10 btn btn--pill btn--green">
                     <button class="btn">{{ button_label|default('Ajouter') }}</button>
                 </div>
+            {% if msg %}
+                <div class="alert alert-success">
+                    {{msg}}
+                </div>
+            {% endif %}
             {{ form_end(form) }}
             <br>
             Projet de l'équipe :

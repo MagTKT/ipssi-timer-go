@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\{Team, UserTeam, User};
+use App\Entity\{Team, UserTeam, User, UserProject};
 use App\Form\UserTeamType;
-use App\Repository\{UserTeamRepository, UserRepository, TeamRepository};
+use App\Repository\{UserTeamRepository, ProjectRepository};
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,9 +29,10 @@ class UserTeamController extends AbstractController
     /**
      * @Route("/new/{idTeam}", name="user_team_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserTeamRepository $UserTeamRepository, Team $idTeam): Response
+    public function new(Request $request, UserTeamRepository $UserTeamRepo, Team $idTeam, ProjectRepository $ProjectRepo): Response
     {
         $userTeam = new UserTeam();
+        
         
         $GLOBALS['idTeam'] = $idTeam->getId();
         
@@ -45,7 +46,7 @@ class UserTeamController extends AbstractController
             $FormUserTeam = $form->get('idUser')->getData();
             $idUser = $FormUserTeam->getId();
 
-            $oneUser = $UserTeamRepository->findBy(array('idTeam'=>$idTeam->getId(),'idUser'=>$idUser));
+            $oneUser = $UserTeamRepo->findBy(array('idTeam'=>$idTeam->getId(),'idUser'=>$idUser));
 
             if(!$oneUser){
                 $createdDate = date('Y-m-d H:i:s');
@@ -53,7 +54,18 @@ class UserTeamController extends AbstractController
 
                 $userTeam->setIdTeam($idTeam);
 
+                $listProject = $ProjectRepo->findBy(array('Team'=>$idTeam->getId()));
+                
                 $entityManager = $this->getDoctrine()->getManager();
+                foreach ($listProject as $onePro) {
+                    $userProject = new UserProject();
+                    $userProject->setIdUser($FormUserTeam);
+                    $userProject->setIdProject($onePro);
+                    $userProject->setDateCreation(new \DateTime($createdDate));
+                    
+                    $entityManager->persist($userProject);
+                }
+
                 $entityManager->persist($userTeam);
                 $entityManager->flush();                
             }else{
@@ -62,7 +74,7 @@ class UserTeamController extends AbstractController
 
             //return $this->redirectToRoute('team_index');
         }
-        $userInTeam = $UserTeamRepository->findBy(array('idTeam'=>$idTeam->getId()));
+        $userInTeam = $UserTeamRepo->findBy(array('idTeam'=>$idTeam->getId()));
 
         return $this->render('user_team/new.html.twig', [
             'user_team' => $userTeam,
