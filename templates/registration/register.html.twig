@@ -16,12 +16,18 @@
                                 {{ form_row(form.name) }}
                                 {{ form_row(form.last_name) }}
                                 {{ form_row(form.email) }}
+                                {% if msg %}
+                                    <div class="alert alert-success">
+                                        {{msg}}
+                                    </div>
+                                {% endif %}
                                 {{ form_row(form.password) }} 
                             </div> 
                         </div>
                         <div class="p-t-10 btn btn--pill btn--green">
                             <button class="btn">{{ button_label|default("S'inscrire") }}</button>
                         </div>
+
                     {{ form_end(form) }}
                 </div>
             </div>
