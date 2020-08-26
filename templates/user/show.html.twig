@@ -36,9 +36,11 @@
                                     </tr>
                                     <tr>
                                         <th>Equipe gérée</th>
-                                        {% for team in user.getTeams %}
-                                            <td>{{ team.name }}</td>
-                                        {% endfor %}
+                                        <td>
+                                            {% for team in user.getTeams %}
+                                                <ul><li>{{ team.name }}</li></ul>
+                                            {% endfor %}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
