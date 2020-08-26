@@ -75,20 +75,24 @@ class ProjectController extends AbstractController
 
                 $project = $ProjectRepo->findOneBy(array('id'=>$idProjet));
 
+                $admin = $idTeam->getTeamAdmin();
+
                 if($project){
                     $project->setTeam($idTeam);
-
+                    
                     $entityManager = $this->getDoctrine()->getManager();
 
-                    $createdDate = date('Y-m-d H:i:s');
+                    $this->PrepareAjoutUserProject($entityManager,$admin,$FormProjet);//ajout projet à admin
+                    
                     foreach ($userTeamList as $userTeam) {
                         $user = $userTeam->getIdUser();
-                        $userProject = new UserProject();
-                        $userProject->setIdUser($user);
-                        $userProject->setIdProject($FormProjet);
-                        $userProject->setDateCreation(new \DateTime($createdDate));
+                        // $userProject = new UserProject();
+                        // $userProject->setIdUser($user);
+                        // $userProject->setIdProject($FormProjet);
+                        // $userProject->setDateCreation(new \DateTime($createdDate));
 
-                        $entityManager->persist($userProject);
+                        // $entityManager->persist($userProject);
+                        $this->PrepareAjoutUserProject($entityManager,$user,$FormProjet);//ajout projet aux membres d'équipe
                     }
 
                     $entityManager->persist($project);
@@ -109,6 +113,16 @@ class ProjectController extends AbstractController
             'projectInTeam' => $projectInTeam,
             'msg' => $msg
         ]);
+    }
+
+    public function PrepareAjoutUserProject($entityManager,$user,$projet ){
+        $createdDate = date('Y-m-d H:i:s');
+        $obj = new UserProject();
+        $obj->setIdUser($user);
+        $obj->setIdProject($projet);
+        $obj->setDateCreation(new \DateTime($createdDate));
+
+        $entityManager->persist($obj);
     }
 
     /**
@@ -157,4 +171,7 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('project_index');
     }
+
+
 }
+
