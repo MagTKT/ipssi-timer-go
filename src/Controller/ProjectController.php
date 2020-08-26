@@ -68,7 +68,7 @@ class ProjectController extends AbstractController
         $msg = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // var_dump('PASSE');
+
             $FormProjet = $form->get('name_project')->getData();
             if($FormProjet){
                 $idProjet = $FormProjet->getId();
@@ -83,14 +83,9 @@ class ProjectController extends AbstractController
                     $entityManager = $this->getDoctrine()->getManager();
 
                     $this->PrepareAjoutUserProject($entityManager,$admin,$FormProjet);//ajout projet à admin
-                    
+
                     foreach ($userTeamList as $userTeam) {
                         $user = $userTeam->getIdUser();
-                        // $userProject = new UserProject();
-                        // $userProject->setIdUser($user);
-                        // $userProject->setIdProject($FormProjet);
-                        // $userProject->setDateCreation(new \DateTime($createdDate));
-
                         // $entityManager->persist($userProject);
                         $this->PrepareAjoutUserProject($entityManager,$user,$FormProjet);//ajout projet aux membres d'équipe
                     }
