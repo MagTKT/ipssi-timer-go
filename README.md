@@ -67,6 +67,8 @@ Si une erreur de type :
 <br><br>
 merci d'effectué les commandes suivantes:
 <br><br>
+composer update
+<br><br>
 composer recipes:install --force -v
 <br><br>
 composer install
