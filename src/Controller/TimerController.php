@@ -31,36 +31,74 @@ class TimerController extends AbstractController
      * @Route("/new", name="timer_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, TimerRepository $TimerRepo): Response
     {
         $timer = new Timer();
         $form = $this->createForm(TimerType::class, $timer);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $project = $form->get('idProject')->getData();
-            $tarace = $project->getTeam();
-            $timer->setIdTeam($tarace);
- 
-            $createdDate = date('Y-m-d H:i:s');
-            $timer->setDateTimeDebut(new \DateTime($createdDate));
-            $id_user = $this->getUser();
-            $timer->setIdUser($id_user);
-            var_dump($timer);
-        
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($timer);
-            $entityManager->flush();
+        $msg = '';
 
-            return $this->redirectToRoute('timer_index');
-        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $timer = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
+            if(!$timer){
+                $project = $form->get('idProject')->getData();
+                $team = $project->getTeam();
+                $timer->setIdTeam($team);
+     
+                $dateDebut = date('Y-m-d H:i:s');
+                $timer->setDateTimeDebut(new \DateTime($dateDebut));
+                $id_user = $this->getUser();
+                $timer->setIdUser($id_user);
+            
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($timer);
+                $entityManager->flush();
+    
+                return $this->redirectToRoute('timer_index');
+            }else {
+                $msg = 'Merci de stopper le timer en cours avant d\'en créer un nouveau';
+            }
         }
 
         return $this->render('timer/new.html.twig', [
             'timer' => $timer,
             'form' => $form->createView(),
+            'msg' => $msg
         ]);
     }
+
+
+    /**
+     * @Route("/stop", name="timer_stop", methods={"GET","POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function stop(Request $request, TimerRepository $TimerRepo): Response
+    {
+        $timer = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
+        
+        $msg = '';
+
+        if ($timer) {
+            $dateFin = new \DateTime(date('Y-m-d H:i:s'));
+            $timer->setDateTimeFin($dateFin);
+            
+            // $dateDebut = $timer->getDateTimeDebut();
+            // $timerDiff = $dateDebut->diff($dateFin);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($timer);
+            $entityManager->flush();
+        }else {
+            $msg = 'Vous n`\'avez pas de timer à arrêter';
+        }
+
+        return $this->render('timer/index.html.twig', [
+            'timer' => $TimerRepo->findAll(),
+            'msg' => $msg
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="timer_show", methods={"GET"})
@@ -104,5 +142,46 @@ class TimerController extends AbstractController
         }
 
         return $this->redirectToRoute('timer_index');
+    }
+
+
+    public function cumulTimer($list)
+    {
+        //list=> liste des projets
+        $date = new \DateTime();
+        $dateTimeFormat = 'd H:i:s';
+        $interval = 0;
+        $j = 0;
+        $h = 0;
+        $m = 0;
+        $s = 0;
+        foreach ($list as $oneElement){
+            if (($project->getDateTimeDebut() != null) && ($project->getDateTimeFin() != null)){
+                $dateStartTimestamp = $project->getDateTimeDebut()->getTimestamp();
+                $dateEndTimestamp = $project->getDateTimeFin()->getTimestamp();
+                $interval += $dateEndTimestamp - $dateStartTimestamp;
+            }
+        }
+
+        if($interval >= 86400){//24h
+            $j = intval($interval / 86400);
+            $interval = ($interval-(86400*$j));
+            //on soustrait le cumul de des jours au total de l'interval pour calculer les restes (heures,minutes,secondes) plus tard
+        }
+
+        if($interval >= 3600){// 1h
+            $h = intval($interval / 3600);
+            $interval = ($interval-(3600*$h));
+        }
+
+        if($interval >= 60){// 1 min
+            $m= intval($interval / 60);
+            $interval = ($interval-(60*$m));
+         }
+        $s = $interval;//jours,heures et minutes soustrait du cumul d'interval, reste les secondes
+
+        $cumulTimer = ['jours'=>$j,'heures'=>$h,'minutes'=>$m,'secondes'=>$s];
+
+        return $cumulTimer;
     }
 }

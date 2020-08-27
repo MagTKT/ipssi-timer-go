@@ -22,7 +22,6 @@ class TimerType extends AbstractType
                     return $idProject->getNameProject();
                 }, 'label'=>'Project '
             ])
-            //->add('Cumul_s')
             ->add('TimerComment')
             /*->add('idUser', EntityType::class, [
                 'class' => User::class,
