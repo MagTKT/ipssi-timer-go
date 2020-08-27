@@ -16,10 +16,9 @@ class RegistrationType extends AbstractType
             ->add('name', TextType::class, ['label' => "Prénom : "])
             ->add('last_name', TextType::class, ['label' => "Nom : "])
             ->add('email', EmailType::class, ['label' => "Mail : "])
-            ->add('password', RepeatedType::class, ['type' =>PasswordType::class,
+            ->add('password', RepeatedType::class, [
+                'type' =>PasswordType::class,
                 'first_options' => [
-                    // instead of being set onto the object directly,
-                    // this is read and encoded in the controller
                     'label' => "Mot de passe : ",
                     'mapped' => false,
                     'constraints' => [
@@ -29,8 +28,6 @@ class RegistrationType extends AbstractType
                     ],
                 ],
                 'second_options' => [
-                    // instead of being set onto the object directly,
-                    // this is read and encoded in the controller
                     'label' => "Confirmation de Mot de passe : ",
                     'mapped' => false,
                     'constraints' => [
