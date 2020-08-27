@@ -30,9 +30,9 @@ class RegistrationController extends AbstractController
             
             $email = $form->get('email')->getData();
 
-            $user = $UserRepo->findOneBy(array('email'=>$email));
+            $userExist = $UserRepo->findOneBy(array('email'=>$email));
 
-            if (!$user) {
+            if (!$userExist) {
                 // encode the plain password
                 $user->setPassword(
                     $passwordEncoder->encodePassword(

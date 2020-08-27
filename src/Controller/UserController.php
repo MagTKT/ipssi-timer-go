@@ -90,11 +90,11 @@ class UserController extends AbstractController
     {
         $allTimer = $TimerRepo->findBy(array('idUser'=> $user));
         $CumulAllTimer = $TimerCont->cumulTimer($allTimer);
-        var_dump($CumulAllTimer);
 
-        // return $this->render('user/show.html.twig', [
-        //     'user' => $user,
-        // ]);
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+            'timer' => $CumulAllTimer
+        ]);
     }
 
     /**
