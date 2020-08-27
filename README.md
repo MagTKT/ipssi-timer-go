@@ -58,3 +58,15 @@ Parametrage specifique (en cas de soucis):
 Sous windows : le docker-compose doit etre en version: '3.6'
 <br><br>
 Sous mac ou linux : le docker-compose doit etre en version: '3.7'
+<br><br>
+<br><br>
+Si une erreur de type : 
+<br><br>
+<br><br>
+[Comment on #301 Unrecognized options "dir_name, namespace" under "doctrine_migrations". Available options are "all_or_nothing", "check_database_platform", "connection", "custom_template", "em", "migrations", "migrations_paths", "name", "organize_migrations", "services", "storage"]
+<br><br>
+merci d'effectué les commandes suivantes:
+<br><br>
+composer recipes:install --force -v
+<br><br>
+composer install
