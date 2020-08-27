@@ -28,20 +28,6 @@ class TimerType extends AbstractType
                 }, 'label'=>'Project '
             ])
             ->add('TimerComment')
-            /*->add('idUser', EntityType::class, [
-                'class' => User::class,
-                'multiple' => false,
-                'choice_label' => function(User $idUser) {
-                    return $idUser->getName().' '.$idUser->getLastName();
-                }, 'label'=>'Utilisateur '
-            ])*/
-            /*->add('idTeam', EntityType::class, [
-                'class' => Team::class,
-                'multiple' => false,
-                'choice_label' => function(Team $idTeam) {
-                    return $idTeam->getName();
-                }, 'label'=>'Team '
-            ])*/
         ;
     }
 
