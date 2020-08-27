@@ -41,8 +41,7 @@
                                                 <li>{{ projet.nameProject}}</li>
                                             {% endfor %}
                                         </td>
-                                    </tr>
-                                                                
+                                    </tr>                    
                                 </tbody>
                             </table>
                             {% if app.user %}
@@ -51,11 +50,11 @@
                                         <div class="p-t-10 btn btn--pill btn--green">
                                         <a class='btn' href="{{ path('user_team_new', {'idTeam': team.id}) }}">Ajouter membre</a>
                                     </div>
+                                    <div class="p-t-10 btn btn--pill btn--green">
+                                        <a class='btn' href="{{ path('project_add_team', {'idTeam': team.id}) }}">Ajouter nouveau projet</a>
+                                    </div>
                                 {% endif %}
                             {% endif %}
-                            <div class="p-t-10 btn btn--pill btn--green">
-                                <a class='btn' href="{{ path('project_add_team', {'idTeam': team.id}) }}">Ajouter nouveau projet</a>
-                            </div>
                         </div>
                     </div>
                 </div>

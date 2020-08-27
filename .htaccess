@@ -1,4 +1,4 @@
-RewriteEngine on
-RewriteCond %{HTTPS} !on
-RewriteRule ^(.*)$ https://timer-go.agence-srp.fr/public [L,R=301,NC]
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
 
