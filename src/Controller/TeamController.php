@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Team;
 use App\Form\TeamType;
-use App\Repository\TeamRepository;
+use App\Repository\{TeamRepository, TimerRepository};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Controller\TimerController;
+
 /**
  * @Route("/team")
  */
@@ -59,10 +61,14 @@ class TeamController extends AbstractController
      * @Route("/{id}", name="team_show", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function show(Team $team): Response
+    public function show(Team $team, TimerRepository $TimerRepo, TimerController $TimerCont): Response
     {
+        $allTimer = $TimerRepo->findBy(array('idTeam'=> $team));
+        $CumulAllTimer = $TimerCont->cumulTimer($allTimer);
+
         return $this->render('team/show.html.twig', [
             'team' => $team,
+            'timer' => $CumulAllTimer
         ]);
     }
 

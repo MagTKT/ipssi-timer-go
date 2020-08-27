@@ -34,17 +34,19 @@ class TimerController extends AbstractController
     public function new(Request $request, TimerRepository $TimerRepo): Response
     {
         $timer = new Timer();
+        $GLOBALS['idUser'] = $this->getUser()->getId();
         $form = $this->createForm(TimerType::class, $timer);
         $form->handleRequest($request);
 
         $msg = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $timer = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
-            if(!$timer){
+            $timerExist = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
+            if(!$timerExist){
+                
                 $project = $form->get('idProject')->getData();
-                $team = $project->getTeam();
-                $timer->setIdTeam($team);
+
+                $timer->setIdTeam($project->getTeam());
      
                 $dateDebut = date('Y-m-d H:i:s');
                 $timer->setDateTimeDebut(new \DateTime($dateDebut));
@@ -67,7 +69,6 @@ class TimerController extends AbstractController
             'msg' => $msg
         ]);
     }
-
 
     /**
      * @Route("/stop", name="timer_stop", methods={"GET","POST"})
@@ -147,19 +148,17 @@ class TimerController extends AbstractController
 
     public function cumulTimer($list)
     {
-        //list=> liste des projets
-        $date = new \DateTime();
-        $dateTimeFormat = 'd H:i:s';
         $interval = 0;
         $j = 0;
         $h = 0;
         $m = 0;
         $s = 0;
+
         foreach ($list as $oneElement){
-            if (($project->getDateTimeDebut() != null) && ($project->getDateTimeFin() != null)){
-                $dateStartTimestamp = $project->getDateTimeDebut()->getTimestamp();
-                $dateEndTimestamp = $project->getDateTimeFin()->getTimestamp();
-                $interval += $dateEndTimestamp - $dateStartTimestamp;
+            if (($oneElement->getDateTimeDebut() != null) && ($oneElement->getDateTimeFin() != null)){
+                $dateStart = $oneElement->getDateTimeDebut()->getTimestamp();
+                $dateFin = $oneElement->getDateTimeFin()->getTimestamp();
+                $interval += $dateFin - $dateStart;
             }
         }
 

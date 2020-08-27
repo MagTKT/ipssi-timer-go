@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
+use App\Repository\{UserRepository, TimerRepository};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Controller\TimerController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -23,6 +24,7 @@ class UserController extends AbstractController
     {
         $this->userRepository = $userRepository;
     }
+    
     /**
      * @Route("/", name="user_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -84,10 +86,14 @@ class UserController extends AbstractController
      * @Route("/{id}", name="user_show", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function show(User $user): Response
+    public function show(User $user, TimerRepository $TimerRepo, TimerController $TimerCont): Response
     {
+        $allTimer = $TimerRepo->findBy(array('idUser'=> $user));
+        $CumulAllTimer = $TimerCont->cumulTimer($allTimer);
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'timer' => $CumulAllTimer
         ]);
     }
 

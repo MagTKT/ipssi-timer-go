@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\{Project, Team, UserProject};
 use App\Form\{ProjectType, ProjectToTeamType};
-use App\Repository\{ProjectRepository,UserTeamRepository};
+use App\Repository\{ProjectRepository,UserTeamRepository, TimerRepository};
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Controller\TimerController;
+
 /**
  * @Route("/project")
  */
@@ -124,10 +126,14 @@ class ProjectController extends AbstractController
      * @Route("/{id}", name="project_show", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function show(Project $project): Response
+    public function show(Project $project, TimerRepository $TimerRepo, TimerController $TimerCont): Response
     {
+        $allTimer = $TimerRepo->findBy(array('idProject'=> $project));
+        $CumulAllTimer = $TimerCont->cumulTimer($allTimer);
+
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'timer' => $CumulAllTimer
         ]);
     }
 
