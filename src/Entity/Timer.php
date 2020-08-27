@@ -46,12 +46,12 @@ class Timer
     private $DateTime_Fin;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true) 
      */
     private $Cumul_s;
   
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $TimerComment;
   
@@ -120,12 +120,12 @@ class Timer
         return $this;
     }
 
-    public function getCumulS(): ?int
+    public function getCumulS(): ?integer
     {
         return $this->Cumul_s;
     }
 
-    public function setCumulS(?int $Cumul_s): self
+    public function setCumulS(?integer $Cumul_s): self
     {
         $this->Cumul_s = $Cumul_s;
     }
