@@ -24,6 +24,7 @@ class UserController extends AbstractController
     {
         $this->userRepository = $userRepository;
     }
+    
     /**
      * @Route("/", name="user_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
