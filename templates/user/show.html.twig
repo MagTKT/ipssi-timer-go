@@ -34,11 +34,17 @@
                                         <th>Password</th>
                                         <td>{{ "C'est privé :)" }}</td>
                                     </tr>
+                                     <tr>
+                                        <th>Temps de travail</th>
+                                        <td>{{ timer.jours }} jours  {{ timer.heures }}h {{ timer.minutes }}min {{ timer.secondes }}s</td>
+                                    </tr>
                                     <tr>
                                         <th>Equipe gérée</th>
-                                        {% for team in user.getTeams %}
-                                            <td>{{ team.name }}</td>
-                                        {% endfor %}
+                                        <td>
+                                            {% for team in user.getTeams %}
+                                                <li>{{ team.name }}</li>
+                                            {% endfor %}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

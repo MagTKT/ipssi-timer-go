@@ -27,6 +27,10 @@
                                         <td>{{ team.dateCreation ? team.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Temps de travail des membres</th>
+                                        <td>{{ timer.jours }} jours  {{ timer.heures }}h {{ timer.minutes }}min {{ timer.secondes }}s</td>
+                                    </tr>
+                                    <tr>
                                         <th>Membres</th>
                                         <td>
                                             {% for team in team.getUserTeams %}

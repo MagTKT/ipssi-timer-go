@@ -19,6 +19,14 @@
                                     <th>Nom du projet</th>
                                     <td>{{ project.nameProject }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Equipé attitrés</th>
+                                    <td>{{ project.getTeam.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Temps de travail cumulé</th>
+                                    <td>{{ timer.jours }} jours  {{ timer.heures }}h {{ timer.minutes }}min {{ timer.secondes }}s</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
