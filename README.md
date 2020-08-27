@@ -35,6 +35,13 @@ MYSQL_PASSWORD='mot de passe de la base'
 puis de nouveau dans votre terminal:
 <br><br>
 docker-compose up --build -d
+<br><br>
+git fetch
+<br><br>
+git ckeckout dev
+<br><br>
+git pull origin dev
+
 
 Effectuer les migrations:
 -------------------------
