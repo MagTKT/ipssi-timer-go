@@ -34,17 +34,19 @@ class TimerController extends AbstractController
     public function new(Request $request, TimerRepository $TimerRepo): Response
     {
         $timer = new Timer();
+        $GLOBALS['idUser'] = $this->getUser()->getId();
         $form = $this->createForm(TimerType::class, $timer);
         $form->handleRequest($request);
 
         $msg = '';
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $timer = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
-            if(!$timer){
+            $timerExist = $TimerRepo->findOneBy(array('DateTime_Fin'=> null));
+            if(!$timerExist){
+                
                 $project = $form->get('idProject')->getData();
-                $team = $project->getTeam();
-                $timer->setIdTeam($team);
+
+                $timer->setIdTeam($project->getTeam());
      
                 $dateDebut = date('Y-m-d H:i:s');
                 $timer->setDateTimeDebut(new \DateTime($dateDebut));
@@ -67,7 +69,6 @@ class TimerController extends AbstractController
             'msg' => $msg
         ]);
     }
-
 
     /**
      * @Route("/stop", name="timer_stop", methods={"GET","POST"})
