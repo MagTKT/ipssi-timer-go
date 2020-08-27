@@ -148,19 +148,17 @@ class TimerController extends AbstractController
 
     public function cumulTimer($list)
     {
-        //list=> liste des projets
-        $date = new \DateTime();
-        $dateTimeFormat = 'd H:i:s';
         $interval = 0;
         $j = 0;
         $h = 0;
         $m = 0;
         $s = 0;
+
         foreach ($list as $oneElement){
-            if (($project->getDateTimeDebut() != null) && ($project->getDateTimeFin() != null)){
-                $dateStartTimestamp = $project->getDateTimeDebut()->getTimestamp();
-                $dateEndTimestamp = $project->getDateTimeFin()->getTimestamp();
-                $interval += $dateEndTimestamp - $dateStartTimestamp;
+            if (($oneElement->getDateTimeDebut() != null) && ($oneElement->getDateTimeFin() != null)){
+                $dateStart = $oneElement->getDateTimeDebut()->getTimestamp();
+                $dateFin = $oneElement->getDateTimeFin()->getTimestamp();
+                $interval += $dateFin - $dateStart;
             }
         }
 
