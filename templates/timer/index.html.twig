@@ -35,10 +35,6 @@
                                     <td>{{ OneTimer.DateTimeDebut ? OneTimer.DateTimeDebut|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>{{ OneTimer.DateTimeFin ? OneTimer.DateTimeFin|date('Y-m-d H:i:s') : '' }}</td>
                                     <td>{{ OneTimer.TimerComment }}</td>
-                                    <td>
-                                        <a href="{{ path('timer_show', {'id': OneTimer.id}) }}">Modifier</a>
-                                        <a href="{{ path('timer_edit', {'id': OneTimer.id}) }}">Editer</a>
-                                    </td>
                                 </tr>
                             {% else %}
                                 <tr>
